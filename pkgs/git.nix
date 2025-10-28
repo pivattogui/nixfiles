@@ -9,10 +9,10 @@
 
     settings = {
       user.name = "Pivatto";
-
       branch.sort = "-committerdate";
       column.ui = "auto";
       commit.verbose = true;
+      core.editor = "vim";
 
       diff = {
         algorithm = "histogram";
