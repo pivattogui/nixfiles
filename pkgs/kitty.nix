@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.kitty = {
     enable = true;
@@ -39,6 +39,9 @@
 
       # New tab
       map cmd+t new_tab_with_cwd
+
+      # Search
+      map ctrl+f launch --type=overlay --stdin-source=@screen_scrollback ${pkgs.fzf}/bin/fzf --no-sort --no-mouse --exact -i
 
       # Create windows horizontally and vertically
       map cmd+shift+n launch --location=hsplit --cwd=current
