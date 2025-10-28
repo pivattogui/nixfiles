@@ -17,6 +17,9 @@
     fzf
     btop
     tig
+    ntl
+    pscale
+    ngrok
   ];
 
 

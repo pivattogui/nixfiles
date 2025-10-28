@@ -9,13 +9,14 @@
   system.defaults.dock = {
     persistent-apps = [
       "/Applications/1password.app"
-      "/Applications/Kitty.app"
       "/Applications/ChatGPT.app"
+      "/Applications/Kitty.app"
       "/Applications/Zen.app"
+      "/Applications/Zed.app"
+      "/Applications/Cursor.app"
       "/Applications/Slack.app"
       "/Applications/DbGate.app"
       "/Applications/OrbStack.app"
-      "/Applications/Cursor.app"
       "/Applications/Spotify.app"
       "/Applications/WhatsApp.app"
     ];

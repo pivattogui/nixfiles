@@ -4,7 +4,7 @@
     let
       systemFn = inputs.nix-darwin.lib.darwinSystem;
       hostConfig = ../hosts/${name};
-      userConfig = ../users/${user.login};
+      userConfig = ../users/${(user.profile or user.login)};
     in systemFn rec {
       inherit system;
 

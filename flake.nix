@@ -17,11 +17,20 @@
     };
   in
   {
-    darwinConfigurations."pivatto-macbook" = mkSystem "pivatto-macbook" {
+    darwinConfigurations."moka" = mkSystem "moka" {
       system = "aarch64-darwin";
       user = {
         login = "pivatto";
         git-email = "github@pivatto.dev";
+      };
+    };
+
+    darwinConfigurations."clinia" = mkSystem "clinia" {
+      system = "aarch64-darwin";
+      user = {
+        login = "pivatto";
+        profile = "guilherme.pivatto";
+        git-email = "guilherme.pivatto@clinia.io";
       };
     };
   };

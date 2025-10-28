@@ -39,5 +39,6 @@
     "steam"
     "keyboardcleantool"
     "stremio"
+    "github"
   ];
 }

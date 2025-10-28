@@ -39,5 +39,10 @@
     "orbstack"
     "cursor"
     "redis-insight"
+    "hoppscotch"
+    "notion"
+    "notion-calendar"
+    "slack"
+    "github"
   ];
 }

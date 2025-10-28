@@ -20,7 +20,8 @@
     eza
     yazi
     bat
-    zsh-autosuggestions
+    tig
+    ntl
   ];
 
   programs.git.settings.user.email = user.git-email;
