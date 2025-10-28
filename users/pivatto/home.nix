@@ -4,6 +4,7 @@
     ../../pkgs/1password.nix
     ../../pkgs/git.nix
     ../../pkgs/kitty.nix
+    ../../pkgs/vim.nix
   ];
 
   xdg.enable = true;
