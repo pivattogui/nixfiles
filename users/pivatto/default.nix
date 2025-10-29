@@ -40,5 +40,6 @@
     "keyboardcleantool"
     "stremio"
     "github"
+    "prismlauncher"
   ];
 }

@@ -10,6 +10,7 @@
   xdg.enable = true;
 
   home.packages = with pkgs; [
+    asdf-vm
     _1password-cli
     docker
     gh
@@ -19,6 +20,8 @@
     btop
     tig
     ntl
+    bat
+    eza
     pscale
     ngrok
   ];

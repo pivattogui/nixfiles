@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   programs.zsh = {
       enable = true;
       oh-my-zsh = {
@@ -17,5 +17,9 @@
         tree = "eza -T";
         uuid = "uuidgen | tr '[:upper:]' '[:lower:]' | tr -d '\n' | pbcopy | echo 'UUID copied to clipboard'";
       };
+      initContent = ''
+        # Inicializar asdf
+        . ${pkgs.asdf-vm}/share/asdf-vm/asdf.sh
+      '';
     };
 }

@@ -14,9 +14,14 @@
     minimize-to-application = true;
     mru-spaces = false;
     show-process-indicators = true;
-
     persistent-others = [];
     show-recents = false;
+
+    # Hot corners
+    wvous-tl-corner = 2;
+    wvous-tr-corner = 12;
+    wvous-bl-corner = 11;
+    wvous-br-corner = 4;
   };
 
   system.defaults.finder = {

@@ -10,6 +10,7 @@
   xdg.enable = true;
 
   home.packages = with pkgs; [
+    asdf-vm
     _1password-cli
     docker
     gh
@@ -23,6 +24,7 @@
     bat
     tig
     ntl
+    zig
   ];
 
   programs.git.settings.user.email = user.git-email;
