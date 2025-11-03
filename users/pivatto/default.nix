@@ -20,7 +20,11 @@
 
   homebrew.enable = true;
 
-  homebrew.onActivation.cleanup = "zap";
+  homebrew.onActivation = {
+    autoUpdate = true;
+    cleanup = "zap";
+    upgrade = true;
+  };
 
   homebrew.casks = [
     "1password"
