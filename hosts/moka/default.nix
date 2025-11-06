@@ -10,6 +10,7 @@
   system.defaults.dock = {
     persistent-apps = [
       "/Applications/1password.app"
+      "/Applications/Proton Mail.app"
       "/Applications/Kitty.app"
       "/Applications/Zen.app"
       "/Applications/Zed.app"
