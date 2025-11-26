@@ -12,9 +12,7 @@
   home.packages = with pkgs; [
     asdf-vm
     _1password-cli
-    docker
     gh
-    lazygit
     lazydocker
     unzip
     fzf
@@ -24,7 +22,8 @@
     bat
     tig
     ntl
-    zig
+    elixir
+    claude-code
   ];
 
   programs.git.settings.user.email = user.git-email;

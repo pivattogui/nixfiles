@@ -45,5 +45,8 @@
     "stremio"
     "github"
     "prismlauncher"
+    "caffeine"
+    "docker"
+    "chatgpt"
   ];
 }
