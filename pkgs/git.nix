@@ -43,17 +43,6 @@
 
       tag.sort = "version:refname";
 
-      alias = {
-        cb = "!f() { git remote prune origin && git branch --vv | grep 'origin/.*: gone]' | aws '{print $1}'| xargs git branch -d; }; f";
-        co = "checkout";
-        d = "diff";
-        dc = "diff --cached";
-        p = "push";
-        patch = "!git --no-pager diff --no-color";
-        pf = "push --force-with-lease";
-        wip = "commit -m 'wip' --no-verify";
-      };
-
       color = {
         status = {
           added = "green";

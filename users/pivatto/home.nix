@@ -1,5 +1,6 @@
 { config, pkgs, user, ... }: {
   imports = [
+    ../../pkgs/common-cli.nix
     ../../pkgs/zsh.nix
     ../../pkgs/1password.nix
     ../../pkgs/git.nix
@@ -9,19 +10,10 @@
 
   xdg.enable = true;
 
+  # User-specific packages
   home.packages = with pkgs; [
-    asdf-vm
-    _1password-cli
-    gh
     lazydocker
-    unzip
-    fzf
-    btop
-    eza
     yazi
-    bat
-    tig
-    ntl
     elixir
     claude-code
   ];

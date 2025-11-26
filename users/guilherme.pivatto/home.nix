@@ -1,5 +1,6 @@
 { config, pkgs, user, ... }: {
   imports = [
+    ../../pkgs/common-cli.nix
     ../../pkgs/zsh.nix
     ../../pkgs/1password.nix
     ../../pkgs/git.nix
@@ -9,23 +10,13 @@
 
   xdg.enable = true;
 
+  # User-specific packages
   home.packages = with pkgs; [
-    asdf-vm
-    _1password-cli
     docker
-    gh
     tree
-    unzip
-    fzf
-    btop
-    tig
-    ntl
-    bat
-    eza
     pscale
     ngrok
   ];
-
 
   programs.git.settings.user.email = user.git-email;
 

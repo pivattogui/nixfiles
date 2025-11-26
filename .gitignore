@@ -1,0 +1,23 @@
+# Nix build outputs
+result
+result-*
+
+# Editor files
+*.swp
+*.swo
+*~
+.*.sw?
+
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Temporary files
+*.tmp
+*.bak
+*.hm-bak
+
+# IDE
+.vscode/
+.idea/

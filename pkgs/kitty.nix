@@ -3,168 +3,166 @@
   programs.kitty = {
     enable = true;
 
-    extraConfig = ''
-      # Fonts
-      font_family      JetBrains Mono
-      font_size        12
-      bold_font        auto
-      italic_font      auto
-      bold_italic_font auto
-      disable_ligatures never
+    # Font configuration
+    font = {
+      name = "JetBrains Mono";
+      size = 12;
+    };
 
-      symbol_map U+E0A0-U+E0A3,U+E0C0-U+E0C7 PowerlineSymbols
+    # Structured settings
+    settings = {
+      # Font settings
+      disable_ligatures = "never";
+      symbol_map = "U+E0A0-U+E0A3,U+E0C0-U+E0C7 PowerlineSymbols";
 
-      enable_audio_bell no
+      # Audio
+      enable_audio_bell = false;
 
-      # Window padding
-      window_padding_width 0
-
-      # Window layout
-      remember_window_size  no
-      initial_window_width  1200
-      initial_window_height 750
-      enabled_layouts splits,stack
-      hide_window_decorations no
+      # Window
+      window_padding_width = 0;
+      remember_window_size = false;
+      initial_window_width = 1200;
+      initial_window_height = 750;
+      enabled_layouts = "splits,stack";
+      hide_window_decorations = false;
 
       # Scrollback
-      scrollback_lines 5000
-      wheel_scroll_multiplier 3.0
+      scrollback_lines = 5000;
+      wheel_scroll_multiplier = "3.0";
 
-      # Detect URLs
-      detect_urls yes
-      open_urls_in_browser yes
-      url_style curly
+      # URLs
+      detect_urls = true;
+      open_urls_in_browser = true;
+      url_style = "curly";
 
-      term xterm-kitty
-
-      # New tab
-      map cmd+t new_tab_with_cwd
-
-      # Search
-      map ctrl+f launch --type=overlay --stdin-source=@screen_scrollback ${pkgs.fzf}/bin/fzf --no-sort --no-mouse --exact -i
-
-      # Create windows horizontally and vertically
-      map cmd+shift+n launch --location=hsplit --cwd=current
-      map cmd+n launch --location=vsplit --cwd=current
-
-      # Navigate between windows
-      map cmd+left neighboring_window left
-      map cmd+right neighboring_window right
-      map cmd+up neighboring_window up
-      map cmd+down neighboring_window down
-
-      # Resize window
-      map cmd+shift+up resize_window taller
-      map cmd+shift+down resize_window shorter
-      map cmd+shift+left resize_window narrower
-      map cmd+shift+right resize_window wider
-
-      # Layout
-      # Navigation between windows is now handled by cmd+arrows
-      # Resizing is handled by cmd+shift+arrows
-      map cmd+l next_layout
+      # Terminal type
+      term = "xterm-kitty";
 
       # Tabs
-      tab_title_max_length 24
+      tab_title_max_length = 24;
 
-      # Navigation
-      map cmd+1 goto_tab 1
-      map cmd+2 goto_tab 2
-      map cmd+3 goto_tab 3
-      map cmd+4 goto_tab 4
-      map cmd+5 goto_tab 5
-      map cmd+6 goto_tab 6
-      map cmd+7 goto_tab 7
-      map cmd+8 goto_tab 8
-      map cmd+9 goto_tab 9
-      map cmd+] next_tab
-      map cmd+[ previous_tab
-
-      # Close tab
-      map cmd+shift+w close_tab
-      map cmd+w close_window
-
-      # Opacity
-      background_opacity 0.60
-      dynamic_background_opacity yes
-
-      # Background blur
-      background_blur 40
+      # Opacity and blur
+      background_opacity = "0.60";
+      dynamic_background_opacity = true;
+      background_blur = 40;
 
       # Window border
-      window_border_width 1pt
-      draw_minimal_borders yes
+      window_border_width = "1pt";
+      draw_minimal_borders = true;
 
-      # The basic colors
-      foreground              #f8f8f8
-      background              #1f1f1f
-      selection_foreground    #1f1f1f
-      selection_background    #79b8ff
+      # Colors - Basic
+      foreground = "#f8f8f8";
+      background = "#1f1f1f";
+      selection_foreground = "#1f1f1f";
+      selection_background = "#79b8ff";
 
-      # Cursor colors
-      cursor                  #f8f8f8
-      cursor_text_color       #1f1f1f
+      # Colors - Cursor
+      cursor = "#f8f8f8";
+      cursor_text_color = "#1f1f1f";
 
-      # URL underline color when hovering with mouse
-      url_color               #79b8ff
+      # Colors - URL
+      url_color = "#79b8ff";
 
-      # Kitty window border colors
-      active_border_color     #79b8ff
-      inactive_border_color   #6b737c
-      bell_border_color       #FF9800
+      # Colors - Window borders
+      active_border_color = "#79b8ff";
+      inactive_border_color = "#6b737c";
+      bell_border_color = "#FF9800";
 
-      # OS Window titlebar colors
-      wayland_titlebar_color system
-      macos_titlebar_color system
+      # Colors - Titlebar
+      wayland_titlebar_color = "system";
+      macos_titlebar_color = "system";
 
-      # Tab bar colors
-      active_tab_foreground   #f8f8f8
-      active_tab_background   #383838
-      inactive_tab_foreground #888888
-      inactive_tab_background #1A1A1A
-      tab_bar_background      #1A1A1A
+      # Colors - Tabs
+      active_tab_foreground = "#f8f8f8";
+      active_tab_background = "#383838";
+      inactive_tab_foreground = "#888888";
+      inactive_tab_background = "#1A1A1A";
+      tab_bar_background = "#1A1A1A";
 
-      # Colors for marks (marked text in the terminal)
-      mark1_foreground #1f1f1f
-      mark1_background #79b8ff
-      mark2_foreground #1f1f1f
-      mark2_background #b392f0
-      mark3_foreground #1f1f1f
-      mark3_background #9db1c5
+      # Colors - Marks
+      mark1_foreground = "#1f1f1f";
+      mark1_background = "#79b8ff";
+      mark2_foreground = "#1f1f1f";
+      mark2_background = "#b392f0";
+      mark3_foreground = "#1f1f1f";
+      mark3_background = "#9db1c5";
 
-      # The 16 terminal colors
+      # Terminal colors - Black
+      color0 = "#1A1A1A";
+      color8 = "#5c5c5c";
 
-      # black
-      color0 #1A1A1A
-      color8 #5c5c5c
+      # Terminal colors - Red
+      color1 = "#f97583";
+      color9 = "#FF7A84";
 
-      # red
-      color1 #f97583
-      color9 #FF7A84
+      # Terminal colors - Green
+      color2 = "#85e89d";
+      color10 = "#85e89d";
 
-      # green
-      color2  #85e89d
-      color10 #85e89d
+      # Terminal colors - Yellow
+      color3 = "#ffab70";
+      color11 = "#FF9800";
 
-      # yellow
-      color3  #ffab70
-      color11 #FF9800
+      # Terminal colors - Blue
+      color4 = "#79b8ff";
+      color12 = "#b392f0";
 
-      # blue
-      color4  #79b8ff
-      color12 #b392f0
+      # Terminal colors - Magenta
+      color5 = "#f97583";
+      color13 = "#FF7A84";
 
-      # magenta
-      color5  #f97583
-      color13 #FF7A84
+      # Terminal colors - Cyan
+      color6 = "#9db1c5";
+      color14 = "#79b8ff";
 
-      # cyan
-      color6  #9db1c5
-      color14 #79b8ff
+      # Terminal colors - White
+      color7 = "#bbbbbb";
+      color15 = "#f8f8f8";
+    };
 
-      # white
-      color7  #bbbbbb
-      color15 #f8f8f8
-    '';
+    # Key bindings (kept in extraConfig as they're easier to maintain this way)
+    keybindings = {
+      # New tab
+      "cmd+t" = "new_tab_with_cwd";
+
+      # Search
+      "ctrl+f" = "launch --type=overlay --stdin-source=@screen_scrollback ${pkgs.fzf}/bin/fzf --no-sort --no-mouse --exact -i";
+
+      # Create windows
+      "cmd+shift+n" = "launch --location=hsplit --cwd=current";
+      "cmd+n" = "launch --location=vsplit --cwd=current";
+
+      # Navigate between windows
+      "cmd+left" = "neighboring_window left";
+      "cmd+right" = "neighboring_window right";
+      "cmd+up" = "neighboring_window up";
+      "cmd+down" = "neighboring_window down";
+
+      # Resize windows
+      "cmd+shift+up" = "resize_window taller";
+      "cmd+shift+down" = "resize_window shorter";
+      "cmd+shift+left" = "resize_window narrower";
+      "cmd+shift+right" = "resize_window wider";
+
+      # Layout
+      "cmd+l" = "next_layout";
+
+      # Tab navigation
+      "cmd+1" = "goto_tab 1";
+      "cmd+2" = "goto_tab 2";
+      "cmd+3" = "goto_tab 3";
+      "cmd+4" = "goto_tab 4";
+      "cmd+5" = "goto_tab 5";
+      "cmd+6" = "goto_tab 6";
+      "cmd+7" = "goto_tab 7";
+      "cmd+8" = "goto_tab 8";
+      "cmd+9" = "goto_tab 9";
+      "cmd+]" = "next_tab";
+      "cmd+[" = "previous_tab";
+
+      # Close
+      "cmd+shift+w" = "close_tab";
+      "cmd+w" = "close_window";
+    };
   };
 }
