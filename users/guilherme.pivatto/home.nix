@@ -16,7 +16,9 @@
     tree
     pscale
     ngrok
-  ];
+    claude-code
+    erlang
+];
 
   programs.git.settings.user.email = user.git-email;
 

@@ -16,5 +16,7 @@
     "notion"
     "notion-calendar"
     "slack"
+    "claude"
+    "linear-linear"
   ];
 }
