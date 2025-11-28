@@ -16,7 +16,6 @@
     tree
     pscale
     ngrok
-    claude-code
     erlang
 ];
 

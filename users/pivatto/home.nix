@@ -15,7 +15,6 @@
     lazydocker
     yazi
     elixir
-    claude-code
   ];
 
   programs.git.settings.user.email = user.git-email;

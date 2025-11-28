@@ -15,5 +15,6 @@
     "keyboardcleantool"
     "chatgpt"
     "github"
+    "claude-code"
   ];
 }
