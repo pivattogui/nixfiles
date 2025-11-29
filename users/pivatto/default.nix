@@ -17,5 +17,6 @@
     "prismlauncher"
     "caffeine"
     "docker-desktop"
+    "bruno"
   ];
 }
