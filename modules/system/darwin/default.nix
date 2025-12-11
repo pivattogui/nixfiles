@@ -1,4 +1,7 @@
 { self, pkgs, ... }: {
+  # Add Homebrew to PATH
+  environment.systemPath = [ "/opt/homebrew/bin" ];
+
   # Enable Touch ID for sudo authentication
   security.pam.services.sudo_local.touchIdAuth = true;
 
