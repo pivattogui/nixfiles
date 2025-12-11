@@ -7,6 +7,15 @@
 
   home-manager.users."${user.login}" = (import ./home.nix { inherit config pkgs user; });
 
+  homebrew.brews = [
+    "fop"
+    "openssl@3"
+    "unixodbc"
+    "openjdk"
+    "wxmac"
+    "cmake"
+  ];
+
   # User-specific Homebrew casks
   homebrew.casks = [
     "dbgate"
