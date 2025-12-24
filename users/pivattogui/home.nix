@@ -18,7 +18,9 @@
     obsidian
     spotify
     discord
+    floorp-bin
     _1password-gui
+    steam
     docker
     btop
     nh

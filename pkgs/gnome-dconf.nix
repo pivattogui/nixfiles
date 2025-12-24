@@ -32,10 +32,13 @@ in
     "org/gnome/shell" = {
       favorite-apps = [
         "org.gnome.Nautilus.desktop"
-        "discord.desktop"
-        "firefox.desktop"
+        "1password.desktop"
         "kitty.desktop"
-        "zeditor.desktop"
+        "dev.zed.Zed.desktop"
+        "obsidian.desktop"
+        "floorp.desktop"
+        "discord.desktop"
+        "steam.desktop"
         "spotify.desktop"
       ];
       enabled-extensions = [
