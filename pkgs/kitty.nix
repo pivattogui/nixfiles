@@ -1,4 +1,10 @@
 { pkgs, ... }:
+let
+  isDarwin = pkgs.stdenv.isDarwin;
+  # Use 'cmd' on macOS, 'ctrl' on Linux
+  modifier = if isDarwin then "cmd" else "alt";
+  shiftModifier = if isDarwin then "cmd+shift" else "alt+shift";
+in
 {
   programs.kitty = {
     enable = true;
@@ -32,11 +38,13 @@
 
       # URLs
       detect_urls = true;
-      open_urls_in_browser = true;
       url_style = "curly";
 
       # Terminal type
       term = "xterm-kitty";
+
+      # Wayland-specific settings (only applies on Linux/Wayland)
+      linux_display_server = if isDarwin then null else "auto";
 
       # Tabs
       tab_title_max_length = 24;
@@ -120,49 +128,55 @@
       color15 = "#f8f8f8";
     };
 
-    # Key bindings (kept in extraConfig as they're easier to maintain this way)
+    # Key bindings (use cmd on macOS, ctrl on Linux)
     keybindings = {
       # New tab
-      "cmd+t" = "new_tab_with_cwd";
+      "${modifier}+t" = "new_tab_with_cwd";
 
       # Search
       "ctrl+f" = "launch --type=overlay --stdin-source=@screen_scrollback ${pkgs.fzf}/bin/fzf --no-sort --no-mouse --exact -i";
 
       # Create windows
-      "cmd+shift+n" = "launch --location=hsplit --cwd=current";
-      "cmd+n" = "launch --location=vsplit --cwd=current";
+      "${shiftModifier}+n" = "launch --location=hsplit --cwd=current";
+      "${modifier}+n" = "launch --location=vsplit --cwd=current";
 
       # Navigate between windows
-      "cmd+left" = "neighboring_window left";
-      "cmd+right" = "neighboring_window right";
-      "cmd+up" = "neighboring_window up";
-      "cmd+down" = "neighboring_window down";
+      "${modifier}+left" = "neighboring_window left";
+      "${modifier}+right" = "neighboring_window right";
+      "${modifier}+up" = "neighboring_window up";
+      "${modifier}+down" = "neighboring_window down";
 
       # Resize windows
-      "cmd+shift+up" = "resize_window taller";
-      "cmd+shift+down" = "resize_window shorter";
-      "cmd+shift+left" = "resize_window narrower";
-      "cmd+shift+right" = "resize_window wider";
+      "${shiftModifier}+up" = "resize_window taller";
+      "${shiftModifier}+down" = "resize_window shorter";
+      "${shiftModifier}+left" = "resize_window narrower";
+      "${shiftModifier}+right" = "resize_window wider";
 
       # Layout
-      "cmd+l" = "next_layout";
+      "${modifier}+l" = "next_layout";
 
       # Tab navigation
-      "cmd+1" = "goto_tab 1";
-      "cmd+2" = "goto_tab 2";
-      "cmd+3" = "goto_tab 3";
-      "cmd+4" = "goto_tab 4";
-      "cmd+5" = "goto_tab 5";
-      "cmd+6" = "goto_tab 6";
-      "cmd+7" = "goto_tab 7";
-      "cmd+8" = "goto_tab 8";
-      "cmd+9" = "goto_tab 9";
-      "cmd+]" = "next_tab";
-      "cmd+[" = "previous_tab";
+      "${modifier}+1" = "goto_tab 1";
+      "${modifier}+2" = "goto_tab 2";
+      "${modifier}+3" = "goto_tab 3";
+      "${modifier}+4" = "goto_tab 4";
+      "${modifier}+5" = "goto_tab 5";
+      "${modifier}+6" = "goto_tab 6";
+      "${modifier}+7" = "goto_tab 7";
+      "${modifier}+8" = "goto_tab 8";
+      "${modifier}+9" = "goto_tab 9";
+      "${modifier}+]" = "next_tab";
+      "${modifier}+[" = "previous_tab";
 
       # Close
-      "cmd+shift+w" = "close_tab";
-      "cmd+w" = "close_window";
+      "${shiftModifier}+w" = "close_tab";
+      "${modifier}+w" = "close_window";
+    };
+
+    # Environment variables for better Wayland compatibility
+    environment = if isDarwin then {} else {
+      # Disable experimental Wayland protocols that cause issues
+      "WAYLAND_DISPLAY" = "wayland-1";
     };
   };
 }

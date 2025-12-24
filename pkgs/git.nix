@@ -1,4 +1,11 @@
-{ ... }: {
+{ pkgs, ... }:
+let
+  isDarwin = pkgs.stdenv.isDarwin;
+  opSshSignPath = if isDarwin
+    then "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+    else "${pkgs._1password-gui}/share/1password/op-ssh-sign";
+in
+{
   programs.git = {
     enable = true;
 
@@ -29,6 +36,8 @@
 
       init.defaultBranch = "main";
       pull.rebase = true;
+
+      merge.conflictStyle = "zdiff3";
 
       push = {
         autoSetupRemote = true;
@@ -73,7 +82,7 @@
 
       gpg = {
         format = "ssh";
-        ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+        ssh.program = opSshSignPath;
       };
     };
   };

@@ -1,25 +1,35 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  isDarwin = pkgs.stdenv.isDarwin;
+in
+{
   programs.zsh = {
+    enable = true;
+    oh-my-zsh = {
       enable = true;
-      oh-my-zsh = {
-        enable = true;
-        plugins = [
-          "git"
-          "fzf"
-        ];
-        theme = "arrow";
-      };
-      shellAliases = {
-        ll = "ls -alF";
-        nix-config = "zed /etc/nix-darwin";
-        nix-clear = "nix-collect-garbage -d";
-        rb = "sudo darwin-rebuild switch --flake /private/etc/nix-darwin";
-        tree = "eza -T";
-        uuid = "uuidgen | tr '[:upper:]' '[:lower:]' | tr -d '\n' | pbcopy | echo 'UUID copied to clipboard'";
-      };
-      initContent = ''
-        # Inicializar asdf
-        . ${pkgs.asdf-vm}/share/asdf-vm/asdf.sh
-      '';
+      plugins = [
+        "git"
+        "fzf"
+      ];
+      theme = "arrow";
     };
+    shellAliases = {
+      ll = "ls -alF";
+      nix-clear = "nix-collect-garbage -d";
+      tree = "eza -T";
+      code = "zed";
+    } // (if isDarwin then {
+      nix-config = "zed /etc/nix-darwin";
+      rb = "sudo darwin-rebuild switch --flake /private/etc/nix-darwin";
+      uuid = "uuidgen | tr '[:upper:]' '[:lower:]' | tr -d '\n' | pbcopy | echo 'UUID copied to clipboard'";
+    } else {
+      nix-config = "zed ~/code/nixfiles";
+      rb = "sudo nixos-rebuild switch --flake ~/code/nixfiles#nixos";
+      uuid = "uuidgen | tr '[:upper:]' '[:lower:]' | tr -d '\n' | xclip -selection clipboard && echo 'UUID copied to clipboard'";
+    });
+    initContent = ''
+      # Inicializar asdf
+      . ${pkgs.asdf-vm}/share/asdf-vm/asdf.sh
+    '';
+  };
 }

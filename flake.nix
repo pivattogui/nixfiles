@@ -1,5 +1,5 @@
 {
-  description = "Darwin configuration for Pivattos-MacBook-Air";
+  description = "Nix configuration for Darwin and NixOS";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -17,6 +17,7 @@
     };
   in
   {
+    # Darwin configurations
     darwinConfigurations."moka" = mkSystem "moka" {
       system = "aarch64-darwin";
       user = {
@@ -31,6 +32,15 @@
         login = "pivatto";
         profile = "guilherme.pivatto";
         git-email = "guilherme.pivatto@clinia.io";
+      };
+    };
+
+    # NixOS configurations
+    nixosConfigurations."nixos" = mkSystem "nixos" {
+      system = "x86_64-linux";
+      user = {
+        login = "pivattogui";
+        git-email = "github@pivatto.dev";
       };
     };
   };
