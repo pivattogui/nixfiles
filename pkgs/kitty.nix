@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   isDarwin = pkgs.stdenv.isDarwin;
   # Use 'cmd' on macOS, 'ctrl' on Linux
@@ -42,9 +42,6 @@ in
 
       # Terminal type
       term = "xterm-kitty";
-
-      # Wayland-specific settings (only applies on Linux/Wayland)
-      linux_display_server = if isDarwin then null else "auto";
 
       # Tabs
       tab_title_max_length = 24;
@@ -126,6 +123,9 @@ in
       # Terminal colors - White
       color7 = "#bbbbbb";
       color15 = "#f8f8f8";
+    } // lib.optionalAttrs (!isDarwin) {
+      # Wayland-specific settings (only applies on Linux/Wayland)
+      linux_display_server = "auto";
     };
 
     # Key bindings (use cmd on macOS, ctrl on Linux)
