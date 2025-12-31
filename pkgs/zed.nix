@@ -74,7 +74,7 @@
     # Theme
     theme = {
       mode = "system";
-      light = "One Light";
+      light = "Oscura";
       dark = "Oscura";
     };
 
