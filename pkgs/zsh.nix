@@ -3,6 +3,9 @@ let
   isDarwin = pkgs.stdenv.isDarwin;
 in
 {
+  # Install asdf-vm for version management
+  home.packages = [ pkgs.asdf-vm ];
+
   programs.zsh = {
     enable = true;
     # With stateVersion >= 26.05, dotDir defaults to ".config/zsh"
