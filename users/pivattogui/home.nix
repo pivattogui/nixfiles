@@ -8,6 +8,7 @@
     ../../pkgs/vim.nix
     ../../pkgs/gnome-dconf.nix
     ../../pkgs/xcompose.nix
+    ../../pkgs/zed.nix
   ];
 
   xdg.enable = true;

@@ -6,6 +6,7 @@
     ../../pkgs/git.nix
     ../../pkgs/kitty.nix
     ../../pkgs/vim.nix
+    ../../pkgs/zed.nix
   ];
 
   xdg.enable = true;
