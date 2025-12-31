@@ -18,6 +18,12 @@
 
     # Enable nvidia-settings menu
     nvidiaSettings = true;
+
+    # Power Management - saves/restores GPU state on suspend/resume
+    powerManagement.enable = true;
+
+    # Keep NVIDIA driver loaded to preserve state
+    nvidiaPersistenced = true;
   };
 
   # Enable OpenGL with 32-bit support
