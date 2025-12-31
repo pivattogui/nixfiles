@@ -35,5 +35,5 @@
 
   programs.git.settings.user.email = user.git-email;
 
-  home.stateVersion = "25.05";
+  home.stateVersion = "26.05";
 }

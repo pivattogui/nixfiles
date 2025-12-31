@@ -5,6 +5,7 @@ in
 {
   programs.zsh = {
     enable = true;
+    # With stateVersion >= 26.05, dotDir defaults to ".config/zsh"
     oh-my-zsh = {
       enable = true;
       plugins = [
