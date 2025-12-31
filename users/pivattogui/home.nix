@@ -6,9 +6,12 @@
     ../../pkgs/git.nix
     ../../pkgs/kitty.nix
     ../../pkgs/vim.nix
-    ../../pkgs/gnome-dconf.nix
     ../../pkgs/xcompose.nix
     ../../pkgs/zed.nix
+    # Gnome
+    ../../pkgs/nixos/gnome-dconf.nix
+    # Hyprland
+    ../../pkgs/nixos/hyprland.nix
   ];
 
   xdg.enable = true;
@@ -26,6 +29,10 @@
     btop
     nh
     nix-output-monitor
+    # Hyprland
+    rofi
+    libnotify
+    playerctl
   ];
 
   programs.direnv = {

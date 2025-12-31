@@ -3,8 +3,17 @@ let
   isDarwin = pkgs.stdenv.isDarwin;
 
   # Platform-specific modifiers
-  modifier = if isDarwin then "cmd" else "alt";
-  shiftModifier = if isDarwin then "cmd+shift" else "alt+shift";
+  modifier = if isDarwin then "cmd" else "ctrl";
+  shiftModifier = if isDarwin then "cmd+shift" else "ctrl+shift";
+
+  # Generate discard_event mappings for Super key combinations (Linux only)
+  # This prevents CSI u codes (8;9u etc) from appearing when pressing Super+key
+  superKeys = lib.strings.stringToCharacters "abcdefghijklmnopqrstuvwxyz0123456789";
+  superDiscardBindings = if isDarwin then {} else
+    lib.listToAttrs (map (key: {
+      name = "super+${key}";
+      value = "discard_event";
+    }) superKeys);
 
   # Common settings (shared across all platforms)
   commonSettings = {
@@ -31,9 +40,6 @@ let
     detect_urls = true;
     url_style = "curly";
 
-    # Terminal type
-    term = "xterm-kitty";
-
     # Tabs
     tab_title_max_length = 24;
 
@@ -47,11 +53,16 @@ let
     background_opacity = "0.60";
     dynamic_background_opacity = true;
     background_blur = 40;
+    term = "xterm-kitty";
   };
 
   # Linux-specific settings (NixOS/Wayland)
   linuxSettings = {
     linux_display_server = "auto";
+    # Use xterm-256color to avoid kitty keyboard protocol issues
+    term = "xterm-256color";
+    # Disable shell integration to prevent CSI u keyboard protocol
+    shell_integration = "disabled";
   };
 
   # Merge settings based on platform
@@ -60,7 +71,7 @@ in
 {
   programs.kitty = {
     enable = true;
-    themeFile = "Min_Dark";
+    themeFile = "vague"; #vague, graphite
 
     # Font configuration
     font = {
@@ -114,7 +125,7 @@ in
       # Close
       "${shiftModifier}+w" = "close_tab";
       "${modifier}+w" = "close_window";
-    };
+    } // superDiscardBindings;
 
     # Environment variables for better Wayland compatibility
     environment = if isDarwin then {} else {

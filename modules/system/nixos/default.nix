@@ -11,6 +11,24 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
+  # Hyprland
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  # Environment variables for Hyprland + NVIDIA
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+  };
+
+  # XDG portal for Hyprland
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+
   # Keyboard layout
   services.xserver.xkb = {
     layout = "us";
@@ -37,6 +55,10 @@
     # GNOME extensions
     gnomeExtensions.dash-to-dock
     gnomeExtensions.blur-my-shell
+    # Hyprland utilities
+    wl-clipboard
+    grim
+    slurp
   ];
 
   # GNOME configuration - Remove bloatware
