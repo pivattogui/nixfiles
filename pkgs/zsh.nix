@@ -31,9 +31,6 @@ in
       rb = "sudo nixos-rebuild switch --flake ~/code/nixfiles#nixos";
       uuid = "uuidgen | tr '[:upper:]' '[:lower:]' | tr -d '\n' | xclip -selection clipboard && echo 'UUID copied to clipboard'";
     });
-    initContent = ''
-      # Inicializar asdf
-      . ${pkgs.asdf-vm}/share/asdf-vm/asdf.sh
-    '';
+    # asdf-vm 0.18+ doesn't need explicit init - works directly from PATH
   };
 }
