@@ -12,5 +12,6 @@
     bat
     tig
     ntl
+    claude-code
   ];
 }

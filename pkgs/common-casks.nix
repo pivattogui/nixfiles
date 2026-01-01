@@ -15,6 +15,6 @@
     "keyboardcleantool"
     "chatgpt"
     "github"
-    "claude-code"
+    "alt-tab"
   ];
 }
