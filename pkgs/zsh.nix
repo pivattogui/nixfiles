@@ -31,6 +31,9 @@ in
       rb = "sudo nixos-rebuild switch --flake ~/code/nixfiles#nixos";
       uuid = "uuidgen | tr '[:upper:]' '[:lower:]' | tr -d '\n' | xclip -selection clipboard && echo 'UUID copied to clipboard'";
     });
-    # asdf-vm 0.18+ doesn't need explicit init - works directly from PATH
+    # asdf-vm 0.18+ binary works from PATH, but shims still need to be added
+    initContent = ''
+      export PATH="$HOME/.asdf/shims:$PATH"
+    '';
   };
 }
