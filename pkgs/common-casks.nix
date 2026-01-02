@@ -16,5 +16,6 @@
     "chatgpt"
     "github"
     "alt-tab"
+    "google-chrome"
   ];
 }
