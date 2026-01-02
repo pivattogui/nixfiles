@@ -13,5 +13,6 @@
     tig
     ntl
     claude-code
+    uv
   ];
 }

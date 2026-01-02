@@ -8,6 +8,7 @@
     ../../pkgs/vim.nix
     ../../pkgs/xcompose.nix
     ../../pkgs/zed.nix
+    ../../pkgs/claude.nix
     # Gnome
     ../../pkgs/nixos/gnome-dconf.nix
     # Hyprland
