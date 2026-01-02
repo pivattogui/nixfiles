@@ -3,9 +3,6 @@ let
   isDarwin = pkgs.stdenv.isDarwin;
 in
 {
-  # Install asdf-vm for version management
-  home.packages = [ pkgs.asdf-vm ];
-
   programs.zsh = {
     enable = true;
     # With stateVersion >= 26.05, dotDir defaults to ".config/zsh"
@@ -34,6 +31,8 @@ in
     # asdf-vm 0.18+ binary works from PATH, but shims still need to be added
     initContent = ''
       export PATH="$HOME/.asdf/shims:$PATH"
-    '';
+    '' + (if isDarwin then "" else ''
+      export UV_PYTHON_PREFERENCE=only-system
+    '');
   };
 }

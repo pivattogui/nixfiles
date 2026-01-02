@@ -18,6 +18,8 @@
   xdg.enable = true;
 
   home.packages = with pkgs; [
+    nodejs
+    python3
     lazydocker
     yazi
     obsidian
@@ -27,7 +29,6 @@
     _1password-gui
     steam
     docker
-    btop
     nh
     nix-output-monitor
     # Hyprland
