@@ -1,4 +1,4 @@
-{ config, pkgs, home-manager, user, ... }:
+{ config, pkgs, home-manager, nix-flatpak, user, ... }:
 {
   imports = [
     home-manager.nixosModules.home-manager
@@ -7,6 +7,9 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "hm-bak";
+  home-manager.sharedModules = [
+    nix-flatpak.homeManagerModules.nix-flatpak
+  ];
 
   programs.zsh.enable = true;
 

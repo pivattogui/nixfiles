@@ -3,6 +3,9 @@
     ./nvidia.nix
   ];
 
+  # Flatpak (packages managed via Home Manager)
+  services.flatpak.enable = true;
+
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

@@ -24,7 +24,9 @@
             };
           };
         }
-      ] else [])
+      ] else [
+        inputs.nix-flatpak.nixosModules.nix-flatpak
+      ])
       ++ [
         hostConfig
         userConfig

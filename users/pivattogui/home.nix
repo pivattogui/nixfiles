@@ -55,6 +55,16 @@
     enableZshIntegration = true;
   };
 
+  services.flatpak.remotes = [{
+    name = "flathub";
+    location = "https://flathub.org/repo/flathub.flatpakrepo";
+  }];
+
+  services.flatpak.packages = [
+    "com.stremio.Stremio"
+    "app.zen_browser.zen"
+  ];
+
   programs.git.settings.user.email = user.git-email;
 
   home.stateVersion = "26.05";
