@@ -35,19 +35,18 @@
     obsidian
     spotify
     discord
-    floorp-bin
     _1password-gui
     steam
     docker
     nh
     pavucontrol
-    nix-output-monitor
-    chromium
+    google-chrome
     # Hyprland
     libnotify
     playerctl
     swaybg
   ];
+
 
   programs.direnv = {
     enable = true;
@@ -61,7 +60,6 @@
   }];
 
   services.flatpak.packages = [
-    "com.stremio.Stremio"
     "app.zen_browser.zen"
   ];
 
