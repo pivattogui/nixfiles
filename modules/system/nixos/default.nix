@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   imports = [
     ./nvidia.nix
   ];
@@ -23,6 +23,13 @@
     NIXOS_OZONE_WL = "1";
   };
 
+  # Cedilla support ('c → ç instead of ć)
+  # mkForce to override GNOME's default ibus
+  environment.variables = {
+    GTK_IM_MODULE = lib.mkForce "cedilla";
+    QT_IM_MODULE = lib.mkForce "cedilla";
+  };
+
   # XDG portal for Hyprland
   xdg.portal = {
     enable = true;
@@ -37,6 +44,10 @@
     layout = "us";
     variant = "intl";
   };
+
+  # GNOME Keyring - auto-unlock on login (fixes Zed auth popup)
+  security.pam.services.gdm.enableGnomeKeyring = true;
+  security.pam.services.login.enableGnomeKeyring = true;
 
   # Audio with PipeWire
   services.pulseaudio.enable = false;

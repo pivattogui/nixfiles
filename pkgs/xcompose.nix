@@ -1,10 +1,9 @@
 { config, pkgs, ... }: {
   home.file.".XCompose".text = ''
-    # Include default compose sequences
     include "%L"
 
-    # Custom cedilha mapping: ' + c = ç, ' + C = Ç
-    <apostrophe> <c> : "ç" ccedilla
-    <apostrophe> <C> : "Ç" Ccedilla
+    # Cedilha: dead_acute + c/C = ç/Ç
+    <dead_acute> <c> : "ç"
+    <dead_acute> <C> : "Ç"
   '';
 }

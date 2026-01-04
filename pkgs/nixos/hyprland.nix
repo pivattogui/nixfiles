@@ -31,12 +31,16 @@
       # Monitor
       monitor = "DP-1,2560x1440@180,auto,1";
 
-      # NVIDIA environment variables
+      # Environment variables
       env = [
+        # NVIDIA
         "LIBVA_DRIVER_NAME,nvidia"
         "XDG_SESSION_TYPE,wayland"
         "GBM_BACKEND,nvidia-drm"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        # Cursor
+        "XCURSOR_THEME,Bibata-Modern-Classic"
+        "XCURSOR_SIZE,24"
       ];
 
       # Input
@@ -52,7 +56,7 @@
         gaps_in = 5;
         gaps_out = 10;
         border_size = 2;
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+        "col.active_border" = "rgba(ffffffee)";
         "col.inactive_border" = "rgba(595959aa)";
         layout = "dwindle";
       };
@@ -60,6 +64,7 @@
       # Decoration
       decoration = {
         rounding = 8;
+        inactive_opacity = 0.85;
         blur = {
           enabled = true;
           size = 3;
@@ -87,7 +92,6 @@
 
       # Layout
       dwindle = {
-        pseudotile = true;
         preserve_split = true;
       };
 
@@ -106,9 +110,9 @@
 
       # Startup
       exec-once = [
+        "swaybg -m fill -i ~/code/nixfiles/assets/wallpaper.jpg"
         "sleep 1 && waybar"
         "dunst"
-        "hyprpaper"
       ];
 
       # Keybindings
@@ -117,7 +121,7 @@
       bind = [
         # Apps
         "$mod, Return, exec, kitty"
-        "$mod, SPACE, exec, rofi -show drun -show-icons"
+        "$mod, SPACE, exec, rofi -show drun"
         "$mod, E, exec, nautilus"
         "$mod, Q, killactive"
         "$mod SHIFT, E, exit"
@@ -125,7 +129,6 @@
         # Window
         "$mod, V, togglefloating"
         "$mod, F, fullscreen"
-        "$mod, P, pseudo"
         "$mod, J, togglesplit"
 
         # Focus (arrow keys)
@@ -184,6 +187,6 @@
   imports = [
     ./waybar.nix
     ./dunst.nix
-    ./hyprpaper.nix
+    ./rofi.nix
   ];
 }

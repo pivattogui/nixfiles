@@ -24,6 +24,9 @@ let
     # Audio
     enable_audio_bell = false;
 
+    # Close without confirmation
+    confirm_os_window_close = 0;
+
     # Window
     window_padding_width = 0;
     remember_window_size = false;
@@ -63,6 +66,8 @@ let
     term = "xterm-256color";
     # Disable shell integration to prevent CSI u keyboard protocol
     shell_integration = "disabled";
+    # Transparency
+    background_opacity = "0.90";
   };
 
   # Merge settings based on platform
