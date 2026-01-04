@@ -94,7 +94,7 @@
     gnome-weather       # Weather
     gnome-clocks        # Clocks/timers
     gnome-characters    # Character map
-    gnome-logs          # System logs viewer
+    #gnome-logs          # System logs viewer
     gnome-font-viewer   # Font viewer
     simple-scan         # Scanner
     yelp                # Help viewer
