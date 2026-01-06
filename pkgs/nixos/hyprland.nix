@@ -124,7 +124,8 @@
         "$mod, SPACE, exec, rofi -show drun"
         "$mod, E, exec, nautilus"
         "$mod, Q, killactive"
-        "$mod SHIFT, E, exit"
+        "$mod SHIFT, E, exec, wlogout"
+        "$mod SHIFT, Q, exec, hyprlock"
 
         # Window
         "$mod, V, togglefloating"

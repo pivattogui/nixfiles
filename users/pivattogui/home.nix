@@ -13,6 +13,8 @@
     ../../pkgs/nixos/gnome-dconf.nix
     # Hyprland
     ../../pkgs/nixos/hyprland.nix
+    ../../pkgs/nixos/hyprlock.nix
+    ../../pkgs/nixos/wlogout.nix
   ];
 
   xdg.enable = true;
@@ -36,11 +38,11 @@
     spotify
     discord
     _1password-gui
-    steam
     docker
     nh
     pavucontrol
     google-chrome
+    prismlauncher
     # Hyprland
     libnotify
     playerctl
@@ -61,6 +63,7 @@
 
   services.flatpak.packages = [
     "app.zen_browser.zen"
+    "com.stremio.Stremio"
   ];
 
   programs.git.settings.user.email = user.git-email;

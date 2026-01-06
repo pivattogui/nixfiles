@@ -14,7 +14,7 @@
 
         # Layout estilo macOS: workspaces à esquerda, clock à direita
         modules-left = [ "hyprland/workspaces" ];
-        modules-center = [ "mpris" "hyprland/window" ];
+        modules-center = [ "hyprland/window" ];
         modules-right = [ "pulseaudio" "network" "tray" "clock" ];
 
         "hyprland/workspaces" = {
@@ -25,21 +25,6 @@
         "hyprland/window" = {
           max-length = 50;
           separate-outputs = true;
-        };
-
-        mpris = {
-          format = "{player_icon} {artist} - {title}";
-          format-paused = "{player_icon} {artist} - {title}";
-          player-icons = {
-            default = "▶";
-            spotify = "";
-            firefox = "";
-            chromium = "";
-          };
-          status-icons = {
-            paused = "⏸";
-          };
-          max-length = 50;
         };
 
         clock = {

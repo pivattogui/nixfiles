@@ -52,6 +52,11 @@
   security.pam.services.gdm.enableGnomeKeyring = true;
   security.pam.services.login.enableGnomeKeyring = true;
 
+  # Hyprlock PAM (no delay on auth)
+  security.pam.services.hyprlock = {
+    nodelay = true;
+  };
+
   # Audio with PipeWire
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -64,6 +69,12 @@
 
   # Printing (disabled - not using printer)
   services.printing.enable = false;
+
+  # Steam with controller support
+  programs.steam = {
+    enable = true;
+    remappingTools.enable = true;
+  };
 
   # System packages
   environment.systemPackages = with pkgs; [
@@ -99,7 +110,6 @@
     simple-scan         # Scanner
     yelp                # Help viewer
     evince              # PDF viewer (use your own)
-    gnome-calculator    # Calculator
     snapshot            # Camera app
     gnome-connections   # Remote desktop viewer
     gnome-system-monitor # System monitor (use btop)
