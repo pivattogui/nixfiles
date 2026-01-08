@@ -1,4 +1,4 @@
-{ config, pkgs, home-manager, nix-flatpak, user, ... }:
+{ config, pkgs, home-manager, nix-flatpak, self, user, ... }:
 {
   imports = [
     home-manager.nixosModules.home-manager
@@ -7,6 +7,7 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "hm-bak";
+  home-manager.extraSpecialArgs = { inherit self user; };
   home-manager.sharedModules = [
     nix-flatpak.homeManagerModules.nix-flatpak
   ];

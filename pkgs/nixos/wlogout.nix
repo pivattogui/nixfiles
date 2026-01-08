@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, self, ... }:
 let
-  iconsPath = "/home/pivattogui/code/nixfiles/assets/wlogout";
+  iconsPath = "${self}/assets/wlogout";
 in {
   home.packages = [ pkgs.wlogout ];
 

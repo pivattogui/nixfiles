@@ -15,5 +15,6 @@
     claude-code
     uv
     opencode
+    bun
   ];
 }

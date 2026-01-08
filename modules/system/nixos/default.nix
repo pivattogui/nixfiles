@@ -24,6 +24,8 @@
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
+    # Steam Big Picture - force Vulkan rendering
+    STEAM_ENABLE_VULKAN_BIG_PICTURE = "1";
   };
 
   # Cedilla support ('c → ç instead of ć)
@@ -71,10 +73,7 @@
   services.printing.enable = false;
 
   # Steam with controller support
-  programs.steam = {
-    enable = true;
-    remappingTools.enable = true;
-  };
+  programs.steam.enable = true;
 
   # System packages
   environment.systemPackages = with pkgs; [

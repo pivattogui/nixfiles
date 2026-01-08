@@ -23,18 +23,18 @@
       "*" = {
         font = "JetBrains Mono 13";
         background = mkLiteral "rgba(18, 18, 18, 0.9)";
-        background-alt = mkLiteral "rgba(38, 38, 38, 0.95)";
+        background-alt = mkLiteral "#1a1a1a";
         foreground = mkLiteral "#e0e0e0";
         selected = mkLiteral "rgba(255, 255, 255, 0.15)";
         active = mkLiteral "#ffffff";
-        urgent = mkLiteral "#ff5555";
+        urgent = mkLiteral "#f38ba8";
       };
 
       "window" = {
         width = mkLiteral "600px";
         padding = mkLiteral "0px";
         border = mkLiteral "1px solid";
-        border-color = mkLiteral "rgba(255, 255, 255, 0.1)";
+        border-color = mkLiteral "#555555";
         border-radius = mkLiteral "12px";
         background-color = mkLiteral "@background";
         location = mkLiteral "center";
@@ -63,7 +63,7 @@
         background-color = mkLiteral "transparent";
         text-color = mkLiteral "@foreground";
         placeholder = "Search...";
-        placeholder-color = mkLiteral "rgba(205, 214, 244, 0.5)";
+        placeholder-color = mkLiteral "#a0a0a0";
       };
 
       "listview" = {
@@ -99,14 +99,6 @@
         background-color = mkLiteral "transparent";
         text-color = mkLiteral "inherit";
         vertical-align = mkLiteral "0.5";
-      };
-
-      "message" = {
-        enabled = false;
-      };
-
-      "mode-switcher" = {
-        enabled = false;
       };
     };
   };

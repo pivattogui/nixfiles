@@ -12,7 +12,6 @@
         height = 28;
         spacing = 0;
 
-        # Layout estilo macOS: workspaces à esquerda, clock à direita
         modules-left = [ "hyprland/workspaces" ];
         modules-center = [ "hyprland/window" ];
         modules-right = [ "pulseaudio" "network" "tray" "clock" ];
@@ -60,31 +59,30 @@
 
     style = ''
       * {
-        font-family: "Inter", "JetBrainsMono Nerd Font";
+        font-family: "JetBrains Mono";
         font-size: 13px;
         font-weight: 600;
       }
 
       window#waybar {
-        background-color: rgba(0, 0, 0, 0.5);
-        color: #ffffff;
+        background-color: rgba(18, 18, 18, 0.85);
+        color: #e0e0e0;
       }
 
-      /* Workspaces */
       #workspaces {
         margin-left: 8px;
       }
 
       #workspaces button {
         padding: 0 8px;
-        color: rgba(255, 255, 255, 0.6);
+        color: #a0a0a0;
         background: transparent;
         border: none;
         border-radius: 0;
       }
 
       #workspaces button:hover {
-        color: #ffffff;
+        color: #e0e0e0;
         background: rgba(255, 255, 255, 0.1);
       }
 
@@ -93,32 +91,24 @@
         background: rgba(255, 255, 255, 0.15);
       }
 
-      /* Centro - mpris e window */
-      #mpris, #window {
-        color: rgba(255, 255, 255, 0.8);
+      #window {
+        color: #a0a0a0;
         padding: 0 12px;
       }
 
-      #mpris {
-        font-style: italic;
-      }
-
-      /* Módulos à direita */
       #clock, #network, #pulseaudio, #tray {
         padding: 0 12px;
-        color: #ffffff;
+        color: #e0e0e0;
       }
 
       #clock {
         margin-right: 8px;
       }
 
-      /* Ícones um pouco maiores */
       #network, #pulseaudio {
         font-size: 14px;
       }
 
-      /* Tray */
       #tray {
         padding: 0 8px;
       }

@@ -1,4 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, self, ... }:
+let
+  wallpaper = "${self}/assets/wallpaper.jpg";
+in {
   home.packages = [ pkgs.hyprlock ];
 
   xdg.configFile."hypr/hyprlock.conf".text = ''
@@ -10,15 +13,13 @@
     }
 
     background {
-      monitor =
-      path = ~/code/nixfiles/assets/wallpaper.jpg
+      path = ${wallpaper}
       blur_passes = 2
       blur_size = 6
       brightness = 0.3
     }
 
     input-field {
-      monitor =
       size = 300, 50
       outline_thickness = 2
       dots_size = 0.25
@@ -44,7 +45,6 @@
     }
 
     label {
-      monitor =
       text = $TIME
       color = rgba(224, 224, 224, 1.0)
       font_size = 72
@@ -55,7 +55,6 @@
     }
 
     label {
-      monitor =
       text = cmd[update:1000] date +"%A, %d de %B"
       color = rgba(160, 160, 160, 1.0)
       font_size = 16

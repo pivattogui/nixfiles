@@ -1,25 +1,13 @@
-{ config, pkgs, user, ... }: {
+{ pkgs, ... }: {
   imports = [
-    ../../pkgs/common-cli.nix
-    ../../pkgs/zsh.nix
-    ../../pkgs/1password.nix
-    ../../pkgs/git.nix
-    ../../pkgs/kitty.nix
-    ../../pkgs/vim.nix
+    ../../modules/home-common.nix
     ../../pkgs/xcompose.nix
-    ../../pkgs/zed.nix
-    ../../pkgs/claude.nix
-    # Gnome
     ../../pkgs/nixos/gnome-dconf.nix
-    # Hyprland
     ../../pkgs/nixos/hyprland.nix
     ../../pkgs/nixos/hyprlock.nix
     ../../pkgs/nixos/wlogout.nix
   ];
 
-  xdg.enable = true;
-
-  # Cursor theme
   home.pointerCursor = {
     name = "Bibata-Modern-Classic";
     package = pkgs.bibata-cursors;
@@ -43,12 +31,10 @@
     pavucontrol
     google-chrome
     prismlauncher
-    # Hyprland
     libnotify
     playerctl
     swaybg
   ];
-
 
   programs.direnv = {
     enable = true;
@@ -65,8 +51,4 @@
     "app.zen_browser.zen"
     "com.stremio.Stremio"
   ];
-
-  programs.git.settings.user.email = user.git-email;
-
-  home.stateVersion = "26.05";
 }

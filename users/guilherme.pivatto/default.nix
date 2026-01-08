@@ -1,7 +1,7 @@
 { config, pkgs, home-manager, user, ... }:
 {
   imports = [
-    ../../modules/user-base.nix
+    ../../modules/system/darwin/user.nix
     ../../pkgs/common-casks.nix
   ];
 
@@ -16,7 +16,6 @@
     "cmake"
   ];
 
-  # User-specific Homebrew casks
   homebrew.casks = [
     "dbgate"
     "orbstack"

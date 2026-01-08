@@ -7,6 +7,7 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "hm-bak";
+  home-manager.extraSpecialArgs = { inherit user; };
   home-manager.sharedModules = [{
     # Use linkApps instead of copyApps to avoid permission issues on macOS
     # https://github.com/nix-community/home-manager/issues/8067
