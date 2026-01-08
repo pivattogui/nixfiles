@@ -14,5 +14,6 @@
     ntl
     claude-code
     uv
+    opencode
   ];
 }

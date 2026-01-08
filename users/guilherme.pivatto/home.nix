@@ -19,6 +19,7 @@
     pscale
     ngrok
     go
+    kubectl
   ];
 
   programs.git.settings.user.email = user.git-email;
