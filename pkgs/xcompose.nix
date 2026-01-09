@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+_: {
   home.file.".XCompose".text = ''
     include "%L"
 

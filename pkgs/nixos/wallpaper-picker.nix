@@ -26,7 +26,25 @@ let
 
     if [ -n "$selected" ]; then
       full_path="$WALLPAPER_DIR/$selected"
+
+      # Set wallpaper
       ${pkgs.swww}/bin/swww img "$full_path" --transition-type wipe --transition-duration 1
+
+      # Generate colors from wallpaper and apply templates
+      ${pkgs.wallust}/bin/wallust run "$full_path"
+
+      # Reload Hyprland to apply new colors
+      hyprctl reload
+
+      # Reload Waybar
+      pkill -SIGUSR2 waybar || true
+
+      # Reload Kitty instances
+      for pid in $(pgrep kitty); do
+        kill -SIGUSR1 "$pid" 2>/dev/null || true
+      done
+
+      ${pkgs.libnotify}/bin/notify-send "Wallpaper" "Theme updated from $selected"
     fi
   '';
 in {

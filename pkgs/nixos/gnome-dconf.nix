@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 let
-  isDarwin = pkgs.stdenv.isDarwin;
+  inherit (pkgs.stdenv) isDarwin;
 in
 {
   # GNOME dconf settings (only on Linux)
@@ -31,7 +31,6 @@ in
     # Shell favorite apps
     "org/gnome/shell" = {
       favorite-apps = [
-        "org.gnome.Nautilus.desktop"
         "1password.desktop"
         "kitty.desktop"
         "dev.zed.Zed.desktop"

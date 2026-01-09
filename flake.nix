@@ -13,7 +13,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, ... }:
+  outputs = inputs@{ nixpkgs, ... }:
   let mkSystem = import ./lib/mksystem.nix {
       inherit nixpkgs inputs;
     };

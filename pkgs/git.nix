@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  isDarwin = pkgs.stdenv.isDarwin;
+  inherit (pkgs.stdenv) isDarwin;
   opSshSignPath = if isDarwin
     then "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
     else "${pkgs._1password-gui}/share/1password/op-ssh-sign";

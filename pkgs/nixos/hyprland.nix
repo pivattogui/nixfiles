@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   gtk = {
     enable = true;
     theme = {
@@ -25,6 +25,9 @@
     enable = true;
 
     settings = {
+      # Source generated colors from wallust
+      source = "~/.config/hypr/colors.conf";
+
       monitor = "DP-1,2560x1440@180,auto,1";
 
       env = [
@@ -46,15 +49,15 @@
       general = {
         gaps_in = 5;
         gaps_out = 10;
-        border_size = 2;
-        "col.active_border" = "rgba(ffffffee)";
+        border_size = 1;
+        "col.active_border" = "rgba(696969ee)";
         "col.inactive_border" = "rgba(595959aa)";
         layout = "dwindle";
       };
 
       decoration = {
         rounding = 8;
-        inactive_opacity = 0.85;
+        inactive_opacity = 0.75;
         blur = {
           enabled = true;
           size = 3;
@@ -94,6 +97,8 @@
 
       exec-once = [
         "swww-daemon && sleep 0.5 && swww restore"
+        # Generate colors from the current wallpaper (via swww query)
+        "sleep 1 && wallust run \"$(swww query | grep -oP 'image: \\K.*')\" 2>/dev/null || true"
         "waybar"
         "swaync"
       ];
@@ -103,7 +108,7 @@
       bind = [
         "$mod, Return, exec, kitty"
         "$mod, SPACE, exec, rofi -show drun"
-        "$mod, E, exec, nautilus"
+        "$mod, E, exec, kitty yazi"
         "$mod, backslash, exec, wallpaper-picker"
         "$mod, Q, killactive"
         "$mod SHIFT, E, exec, powermenu"
@@ -166,5 +171,6 @@
     ./rofi.nix
     ./powermenu.nix
     ./wallpaper-picker.nix
+    ./wallust.nix
   ];
 }

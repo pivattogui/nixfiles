@@ -1,16 +1,18 @@
-{ config, pkgs, home-manager, nix-flatpak, self, user, ... }:
+{ pkgs, home-manager, nix-flatpak, self, user, ... }:
 {
   imports = [
     home-manager.nixosModules.home-manager
   ];
 
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.backupFileExtension = "hm-bak";
-  home-manager.extraSpecialArgs = { inherit self user; };
-  home-manager.sharedModules = [
-    nix-flatpak.homeManagerModules.nix-flatpak
-  ];
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "hm-bak";
+    extraSpecialArgs = { inherit self user; };
+    sharedModules = [
+      nix-flatpak.homeManagerModules.nix-flatpak
+    ];
+  };
 
   programs.zsh.enable = true;
 

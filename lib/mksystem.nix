@@ -11,7 +11,7 @@
     in systemFn rec {
       inherit system;
 
-      specialArgs = inputs // { user = user; };
+      specialArgs = inputs // { inherit user; };
 
       modules = [
         { nixpkgs.config.allowUnfree = true; }

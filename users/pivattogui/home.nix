@@ -26,13 +26,15 @@
     discord
     _1password-gui
     docker
-    nh
     pavucontrol
     google-chrome
     prismlauncher
     libnotify
     playerctl
     swww
+    cava
+    fastfetch
+    obs-studio
   ];
 
   programs.direnv = {

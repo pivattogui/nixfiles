@@ -1,4 +1,4 @@
-{ self, pkgs, ... }: {
+{ ... }: {
   imports = [
     ./hardware.nix
     ../../modules/system/nixos

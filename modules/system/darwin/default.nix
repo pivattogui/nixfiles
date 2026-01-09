@@ -1,4 +1,4 @@
-{ self, pkgs, ... }: {
+_: {
   # Add Homebrew to PATH
   environment.systemPath = [ "/opt/homebrew/bin" ];
 

@@ -1,4 +1,4 @@
-{ ... }:
+_:
 {
   # Common Homebrew casks shared across all users
   homebrew.casks = [

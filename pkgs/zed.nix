@@ -1,6 +1,6 @@
-{ pkgs, lib, ... }: {
+_: {
   # Zed editor configuration
-  # Zed is installed via Homebrew Cask (see users/*/default.nix)
+  # Zed is installed via Homebrew Cask on macOS, nixpkgs on Linux
   # This module manages the editor's settings declaratively
 
   xdg.configFile."zed/settings.json".text = builtins.toJSON {

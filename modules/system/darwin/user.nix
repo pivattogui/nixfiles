@@ -1,19 +1,21 @@
-{ config, pkgs, home-manager, user, ... }:
+{ home-manager, user, ... }:
 {
   imports = [
     home-manager.darwinModules.home-manager
   ];
 
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.backupFileExtension = "hm-bak";
-  home-manager.extraSpecialArgs = { inherit user; };
-  home-manager.sharedModules = [{
-    # Use linkApps instead of copyApps to avoid permission issues on macOS
-    # https://github.com/nix-community/home-manager/issues/8067
-    targets.darwin.copyApps.enable = false;
-    targets.darwin.linkApps.enable = true;
-  }];
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "hm-bak";
+    extraSpecialArgs = { inherit user; };
+    sharedModules = [{
+      # Use linkApps instead of copyApps to avoid permission issues on macOS
+      # https://github.com/nix-community/home-manager/issues/8067
+      targets.darwin.copyApps.enable = false;
+      targets.darwin.linkApps.enable = true;
+    }];
+  };
 
   system.primaryUser = user.login;
 
@@ -23,11 +25,12 @@
     home = "/Users/${user.login}";
   };
 
-  homebrew.enable = true;
-
-  homebrew.onActivation = {
-    autoUpdate = true;
-    cleanup = "zap";
-    upgrade = true;
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap";
+      upgrade = true;
+    };
   };
 }

@@ -1,8 +1,8 @@
-{ config, pkgs, home-manager, self, user, ... }:
+{ config, pkgs, self, user, ... }:
 {
   imports = [
     ../../modules/system/nixos/user.nix
   ];
 
-  home-manager.users."${user.login}" = (import ./home.nix { inherit config pkgs self user; });
+  home-manager.users."${user.login}" = import ./home.nix { inherit config pkgs self user; };
 }

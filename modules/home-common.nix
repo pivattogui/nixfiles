@@ -1,4 +1,4 @@
-{ user, ... }: {
+{ user, pkgs, ... }: {
   imports = [
     ../pkgs/common-cli.nix
     ../pkgs/zsh.nix
@@ -13,6 +13,14 @@
   xdg.enable = true;
 
   programs.git.settings.user.email = user.git-email;
+
+  home.packages = with pkgs; [
+    # Nix tooling
+    nh
+    statix
+    deadnix
+    alejandra
+  ];
 
   home.stateVersion = "26.05";
 }
