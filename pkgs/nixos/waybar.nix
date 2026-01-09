@@ -14,7 +14,23 @@
 
         modules-left = [ "hyprland/workspaces" ];
         modules-center = [ "hyprland/window" ];
-        modules-right = [ "pulseaudio" "network" "tray" "clock" ];
+        modules-right = [ "pulseaudio" "network" "custom/notification" "tray" "clock" ];
+
+        "custom/notification" = {
+          tooltip = false;
+          format = "{icon}";
+          format-icons = {
+            notification = "󰂚";
+            none = "󰂜";
+            dnd-notification = "󰂛";
+            dnd-none = "󰪑";
+          };
+          return-type = "json";
+          exec = "swaync-client -swb";
+          on-click = "swaync-client -t -sw";
+          on-click-right = "swaync-client -d -sw";
+          escape = true;
+        };
 
         "hyprland/workspaces" = {
           format = "{name}";
@@ -59,7 +75,7 @@
 
     style = ''
       * {
-        font-family: "JetBrains Mono";
+        font-family: "Inter";
         font-size: 13px;
         font-weight: 600;
       }
@@ -96,7 +112,7 @@
         padding: 0 12px;
       }
 
-      #clock, #network, #pulseaudio, #tray {
+      #clock, #network, #pulseaudio, #custom-notification, #tray {
         padding: 0 12px;
         color: #e0e0e0;
       }

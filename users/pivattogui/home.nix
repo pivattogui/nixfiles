@@ -5,7 +5,6 @@
     ../../pkgs/nixos/gnome-dconf.nix
     ../../pkgs/nixos/hyprland.nix
     ../../pkgs/nixos/hyprlock.nix
-    ../../pkgs/nixos/wlogout.nix
   ];
 
   home.pointerCursor = {
@@ -33,7 +32,7 @@
     prismlauncher
     libnotify
     playerctl
-    swaybg
+    swww
   ];
 
   programs.direnv = {
@@ -50,5 +49,6 @@
   services.flatpak.packages = [
     "app.zen_browser.zen"
     "com.stremio.Stremio"
+    "com.github.tchx84.Flatseal"
   ];
 }

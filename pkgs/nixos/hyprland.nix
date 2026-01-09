@@ -1,7 +1,4 @@
-{ config, pkgs, self, ... }:
-let
-  wallpaper = "${self}/assets/wallpaper.jpg";
-in {
+{ config, pkgs, ... }: {
   gtk = {
     enable = true;
     theme = {
@@ -96,9 +93,9 @@ in {
       ];
 
       exec-once = [
-        "swaybg -m fill -i ${wallpaper}"
+        "swww-daemon && sleep 0.5 && swww restore"
         "waybar"
-        "dunst"
+        "swaync"
       ];
 
       "$mod" = "SUPER";
@@ -107,8 +104,9 @@ in {
         "$mod, Return, exec, kitty"
         "$mod, SPACE, exec, rofi -show drun"
         "$mod, E, exec, nautilus"
+        "$mod, backslash, exec, wallpaper-picker"
         "$mod, Q, killactive"
-        "$mod SHIFT, E, exec, wlogout"
+        "$mod SHIFT, E, exec, powermenu"
         "$mod SHIFT, Q, exec, hyprlock"
 
         "$mod, V, togglefloating"
@@ -146,6 +144,13 @@ in {
         "$mod SHIFT, 9, movetoworkspace, 9"
 
         "$mod SHIFT, S, exec, grim -g \"$(slurp)\" - | wl-copy"
+
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPrev, exec, playerctl previous"
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
       ];
 
       bindm = [
@@ -157,7 +162,9 @@ in {
 
   imports = [
     ./waybar.nix
-    ./dunst.nix
+    ./swaync.nix
     ./rofi.nix
+    ./powermenu.nix
+    ./wallpaper-picker.nix
   ];
 }
