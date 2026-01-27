@@ -11,16 +11,14 @@
     # Flatpak (packages managed via Home Manager)
     flatpak.enable = true;
 
-    # X11 and GNOME
-    xserver = {
+    # Greetd display manager
+    greetd = {
       enable = true;
-      xkb = {
-        layout = "us";
-        variant = "intl";
+      settings.default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        user = "greeter";
       };
     };
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
 
     # Audio with PipeWire
     pulseaudio.enable = false;
@@ -31,8 +29,26 @@
       pulse.enable = true;
     };
 
+    # GNOME Keyring (standalone, without GNOME desktop)
+    gnome.gnome-keyring.enable = true;
+
     # Printing (disabled - not using printer)
     printing.enable = false;
+
+    # Tailscale VPN
+    tailscale.enable = true;
+  };
+
+  # Tailscale: don't start automatically
+  systemd.services.tailscaled.wantedBy = lib.mkForce [];
+
+  # Flatpak fonts: expose NixOS fonts at /usr/share/fonts (FHS path)
+  # Required because xdg-desktop-portal-gtk expects fonts at standard locations
+  system.fsPackages = [ pkgs.bindfs ];
+  fileSystems."/usr/share/fonts" = {
+    device = "/run/current-system/sw/share/X11/fonts";
+    fsType = "fuse.bindfs";
+    options = [ "ro" "resolve-symlinks" "x-gvfs-hide" ];
   };
 
   # Hyprland
@@ -51,74 +67,14 @@
       STEAM_ENABLE_VULKAN_BIG_PICTURE = "1";
     };
 
-    # Cedilla support ('c → ç instead of ć)
-    # mkForce to override GNOME's default ibus
-    variables = {
-      GTK_IM_MODULE = lib.mkForce "cedilla";
-      QT_IM_MODULE = lib.mkForce "cedilla";
-    };
-
     # System packages
     systemPackages = with pkgs; [
       git
       vim
-      # GNOME extensions
-      gnomeExtensions.dash-to-dock
-      gnomeExtensions.blur-my-shell
       # Hyprland utilities
       wl-clipboard
       grim
       slurp
-    ];
-
-    # GNOME configuration - Remove bloatware
-    gnome.excludePackages = with pkgs; [
-      nautilus            # File manager (using Thunar)
-      # Media apps
-      cheese              # Webcam
-      epiphany            # Web browser
-      geary               # Email client
-      gnome-music         # Music player
-      totem               # Video player
-
-      # Utility apps
-      gnome-tour          # Welcome tour
-      gnome-contacts      # Contacts manager
-      gnome-maps          # Maps
-      gnome-weather       # Weather
-      gnome-clocks        # Clocks/timers
-      gnome-characters    # Character map
-      #gnome-logs          # System logs viewer
-      gnome-font-viewer   # Font viewer
-      simple-scan         # Scanner
-      yelp                # Help viewer
-      evince              # PDF viewer (use your own)
-      snapshot            # Camera app
-      gnome-connections   # Remote desktop viewer
-      gnome-system-monitor # System monitor (use btop)
-      gnome-text-editor   # Text editor (use vim)
-      gnome-terminal      # Terminal (use kitty)
-      gnome-console       # Console (alternative terminal)
-      baobab              # Disk usage analyzer
-      gnome-software      # Software center (use nix)
-      seahorse            # Passwords and Keys (GnuPG/SSH key manager)
-
-      # Games
-      gnome-chess
-      gnome-mahjongg
-      gnome-mines
-      gnome-sudoku
-      gnome-tetravex
-      aisleriot           # Solitaire
-      atomix
-      five-or-more
-      four-in-a-row
-      hitori
-      iagno
-      lightsoff
-      quadrapassel
-      swell-foop
-      tali
     ];
   };
 
@@ -129,13 +85,25 @@
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal-hyprland
     ];
+    config = {
+      common = {
+        default = [ "gtk" ];
+      };
+      Hyprland = {
+        default = [ "hyprland" "gtk" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.GlobalShortcuts" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+      };
+    };
   };
 
   # Security - PAM services
   security = {
     # GNOME Keyring - auto-unlock on login (fixes Zed auth popup)
     pam.services = {
-      gdm.enableGnomeKeyring = true;
+      greetd.enableGnomeKeyring = true;
       login.enableGnomeKeyring = true;
       # Hyprlock PAM (no delay on auth)
       hyprlock.nodelay = true;

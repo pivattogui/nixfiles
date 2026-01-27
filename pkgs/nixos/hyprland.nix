@@ -37,6 +37,9 @@
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
         "XCURSOR_THEME,Bibata-Modern-Classic"
         "XCURSOR_SIZE,24"
+        # Cedilla support ('c → ç instead of ć)
+        "GTK_IM_MODULE,cedilla"
+        "QT_IM_MODULE,cedilla"
       ];
 
       input = {
@@ -93,6 +96,7 @@
         "float, class:^(pavucontrol)$"
         "float, class:^(nm-connection-editor)$"
         "float, class:^(1Password)$"
+        "opacity 1.0 override 1.0 override, class:^(nemo)$"
       ];
 
       exec-once = [
@@ -108,7 +112,7 @@
       bind = [
         "$mod, Return, exec, kitty"
         "$mod, SPACE, exec, rofi -show drun"
-        "$mod, E, exec, kitty yazi"
+        "$mod, E, exec, nemo"
         "$mod, backslash, exec, wallpaper-picker"
         "$mod, Q, killactive"
         "$mod SHIFT, E, exec, powermenu"

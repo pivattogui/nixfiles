@@ -16,5 +16,10 @@
     uv
     opencode
     bun
+    ncdu
+    ripgrep
+    fd
+    tldr
+    jq
   ];
 }

@@ -2,7 +2,6 @@
   imports = [
     ../../modules/home-common.nix
     ../../pkgs/xcompose.nix
-    ../../pkgs/nixos/gnome-dconf.nix
     ../../pkgs/nixos/hyprland.nix
     ../../pkgs/nixos/hyprlock.nix
   ];
@@ -20,7 +19,7 @@
     python3
     zed-editor
     lazydocker
-    yazi
+    nemo
     obsidian
     spotify
     discord
@@ -35,6 +34,9 @@
     cava
     fastfetch
     obs-studio
+    heroic
+    # Portal GTK for Flatpak URL opening (OpenURI)
+    xdg-desktop-portal-gtk
   ];
 
   programs.direnv = {
@@ -51,6 +53,15 @@
   services.flatpak.packages = [
     "app.zen_browser.zen"
     "com.stremio.Stremio"
-    "com.github.tchx84.Flatseal"
+    "io.github.flattool.Warehouse"
   ];
+
+  # Flatpak overrides: give access to /nix/store so apps can follow font symlinks
+  services.flatpak.overrides = {
+    global = {
+      Context.filesystems = [
+        "/nix/store:ro"
+      ];
+    };
+  };
 }

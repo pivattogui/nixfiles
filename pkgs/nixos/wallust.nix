@@ -152,6 +152,19 @@ let
     @define-color dialog_fg_color {{foreground}};
     @define-color sidebar_bg_color {{background | lighten(0.03)}};
     @define-color sidebar_fg_color {{foreground}};
+    @define-color sidebar_backdrop_color {{background | lighten(0.03)}};
+
+    /* Disable backdrop dimming */
+    .navigation-sidebar:backdrop,
+    .sidebar:backdrop,
+    .sidebar-pane:backdrop {
+      background-color: @sidebar_bg_color;
+      color: @sidebar_fg_color;
+    }
+
+    window:backdrop {
+      background-color: @window_bg_color;
+    }
   '';
 
   # GTK3 uses same format as GTK4
