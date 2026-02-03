@@ -15,18 +15,22 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "adwaita";
+    platformTheme.name = "gnome";
     style.name = "adwaita-dark";
   };
 
-  dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+  dconf.settings."org/gnome/desktop/interface" = {
+    color-scheme = "prefer-dark";
+    icon-theme = "Adwaita";
+    gtk-theme = "Adwaita-dark";
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
 
     settings = {
-      # Source generated colors from wallust
-      source = "~/.config/hypr/colors.conf";
+      # Source generated colors from Caelestia
+      source = "~/.config/hypr/scheme/current.conf";
 
       monitor = "DP-1,2560x1440@180,auto,1";
 
@@ -40,6 +44,8 @@
         # Cedilla support ('c → ç instead of ć)
         "GTK_IM_MODULE,cedilla"
         "QT_IM_MODULE,cedilla"
+        # Force icon theme for Qt apps (Caelestia Shell)
+        "QT_QPA_PLATFORMTHEME,gnome"
       ];
 
       input = {
@@ -60,7 +66,8 @@
 
       decoration = {
         rounding = 8;
-        inactive_opacity = 0.75;
+        inactive_opacity = 0.80;
+        active_opacity = 0.98;
         blur = {
           enabled = true;
           size = 3;
@@ -96,27 +103,31 @@
         "float, class:^(pavucontrol)$"
         "float, class:^(nm-connection-editor)$"
         "float, class:^(1Password)$"
-        "opacity 1.0 override 1.0 override, class:^(nemo)$"
+        "float, class:^(.blueman-manager-wrapped)$"
+        "opacity 1.0 override 1.0 override, class:^(org.gnome.Nautilus)$"
       ];
 
       exec-once = [
+        # Wallpaper daemon
         "swww-daemon && sleep 0.5 && swww restore"
-        # Generate colors from the current wallpaper (via swww query)
-        "sleep 1 && wallust run \"$(swww query | grep -oP 'image: \\K.*')\" 2>/dev/null || true"
-        "waybar"
-        "swaync"
+        # Caelestia shell (bar, notifications, launcher, etc)
+        "caelestia-shell"
+        # Startup apps (minimized to tray)
+        "1password --silent"
+        "discord --start-minimized"
+        "blueman-applet"
       ];
 
       "$mod" = "SUPER";
 
       bind = [
         "$mod, Return, exec, kitty"
-        "$mod, SPACE, exec, rofi -show drun"
-        "$mod, E, exec, nemo"
-        "$mod, backslash, exec, wallpaper-picker"
+        "$mod, SPACE, exec, caelestia-shell ipc call drawers toggle launcher"
+        "$mod, E, exec, nautilus"
+        "$mod, backslash, exec, caelestia-shell ipc call drawers toggle sidebar"
         "$mod, Q, killactive"
-        "$mod SHIFT, E, exec, powermenu"
-        "$mod SHIFT, Q, exec, hyprlock"
+        "$mod SHIFT, E, exec, caelestia session"
+        "$mod SHIFT, Q, exec, caelestia-shell ipc call lock lock"
 
         "$mod, V, togglefloating"
         "$mod, F, fullscreen"
@@ -168,13 +179,4 @@
       ];
     };
   };
-
-  imports = [
-    ./waybar.nix
-    ./swaync.nix
-    ./rofi.nix
-    ./powermenu.nix
-    ./wallpaper-picker.nix
-    ./wallust.nix
-  ];
 }

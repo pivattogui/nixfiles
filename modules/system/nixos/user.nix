@@ -1,4 +1,4 @@
-{ pkgs, home-manager, nix-flatpak, self, user, ... }:
+{ pkgs, home-manager, nix-flatpak, ags, astal, caelestia-shell, caelestia-cli, self, user, ... }:
 {
   imports = [
     home-manager.nixosModules.home-manager
@@ -8,9 +8,10 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "hm-bak";
-    extraSpecialArgs = { inherit self user; };
+    extraSpecialArgs = { inherit self user ags astal caelestia-shell caelestia-cli; };
     sharedModules = [
       nix-flatpak.homeManagerModules.nix-flatpak
+      ags.homeManagerModules.default
     ];
   };
 

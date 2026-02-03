@@ -1,8 +1,4 @@
 _: {
-  # Zed editor configuration
-  # Zed is installed via Homebrew Cask on macOS, nixpkgs on Linux
-  # This module manages the editor's settings declaratively
-
   xdg.configFile."zed/settings.json".text = builtins.toJSON {
     # Cursor
     cursor_shape = "block";
