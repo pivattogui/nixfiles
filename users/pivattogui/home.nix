@@ -3,7 +3,7 @@
     ../../modules/home-common.nix
     ../../pkgs/xcompose.nix
     ../../pkgs/nixos/hyprland.nix
-    ../../pkgs/nixos/hyprlock.nix
+    ../../pkgs/nixos/caelestia.nix
   ];
 
   home.pointerCursor = {
@@ -14,12 +14,18 @@
     x11.enable = true;
   };
 
+  home.sessionVariables = {
+    XDG_DATA_DIRS = "$HOME/.local/share\${XDG_DATA_DIRS:+:}$XDG_DATA_DIRS";
+  };
+
   home.packages = with pkgs; [
     nodejs
     python3
     zed-editor
     lazydocker
-    nemo
+    nautilus
+    adwaita-icon-theme
+    adwaita-icon-theme-legacy  # Fullcolor icons (GNOME 46+ split)
     obsidian
     spotify
     discord
@@ -35,8 +41,11 @@
     fastfetch
     obs-studio
     heroic
+    vlc
     # Portal GTK for Flatpak URL opening (OpenURI)
     xdg-desktop-portal-gtk
+    # Qt6 GNOME platform theme (for Caelestia Shell icons)
+    qgnomeplatform-qt6
   ];
 
   programs.direnv = {

@@ -6,8 +6,17 @@
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
   # Services
   services = {
+    # Bluetooth manager
+    blueman.enable = true;
+
     # Flatpak (packages managed via Home Manager)
     flatpak.enable = true;
 
@@ -105,8 +114,6 @@
     pam.services = {
       greetd.enableGnomeKeyring = true;
       login.enableGnomeKeyring = true;
-      # Hyprlock PAM (no delay on auth)
-      hyprlock.nodelay = true;
     };
     rtkit.enable = true;
   };
