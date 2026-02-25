@@ -10,7 +10,6 @@
     defaults.dock = {
       persistent-apps = [
         "/Applications/1password.app"
-        "/Applications/Claude.app"
         "/Applications/Kitty.app"
         "/Applications/Linear.app"
         "/Applications/Zen.app"

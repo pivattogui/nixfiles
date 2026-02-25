@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   inherit (pkgs.stdenv) isDarwin;
-  flake = if isDarwin then "/private/etc/nix-darwin" else "~/code/nixfiles";
+  flake = if isDarwin then "~/Code/nixfiles" else "~/code/nixfiles";
   nhCmd = if isDarwin then "nh darwin" else "nh os";
 in
 {

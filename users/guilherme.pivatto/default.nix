@@ -8,6 +8,7 @@
   home-manager.users."${user.login}" = import ./home.nix { inherit config pkgs user; };
 
   homebrew.brews = [
+    "asdf"
     "fop"
     "openssl@3"
     "unixodbc"
@@ -24,7 +25,6 @@
     "notion"
     "notion-calendar"
     "slack"
-    "claude"
     "linear-linear"
   ];
 }

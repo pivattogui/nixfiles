@@ -53,8 +53,7 @@
     darwinConfigurations."clinia" = mkSystem "clinia" {
       system = "aarch64-darwin";
       user = {
-        login = "pivatto";
-        profile = "guilherme.pivatto";
+        login = "guilherme.pivatto";
         git-email = "guilherme.pivatto@clinia.io";
       };
     };
