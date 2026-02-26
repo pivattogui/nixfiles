@@ -15,6 +15,7 @@
     "openjdk"
     "wxmac"
     "cmake"
+    "cloudflared"
   ];
 
   homebrew.casks = [

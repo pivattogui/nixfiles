@@ -54,6 +54,7 @@ let
     dynamic_background_opacity = true;
     background_blur = 40;
     term = "xterm-kitty";
+    allow_remote_control = "yes";
   };
 
   linuxSettings = {
@@ -83,8 +84,14 @@ in
       # New tab
       "${modifier}+t" = "new_tab_with_cwd";
 
-      # Search
-      "ctrl+f" = "launch --type=overlay --stdin-source=@screen_scrollback ${pkgs.fzf}/bin/fzf --no-sort --no-mouse --exact -i";
+      # Search in zsh history
+      "${modifier}+r" = "launch --type=overlay --allow-remote-control sh -c 'cmd=$(cat ~/.zsh_history | ${pkgs.fzf}/bin/fzf --tac --no-sort --no-mouse --exact -i) && [ -n \"$cmd\" ] && kitty @ send-text \"$cmd\"'";
+
+      # Search in terminal scrollback
+      "${modifier}+f" = "launch --type=overlay --stdin-source=@screen_scrollback ${pkgs.fzf}/bin/fzf --no-sort --no-mouse --exact -i";
+
+      # Disable resize mode
+      "ctrl+shift+r" = "no_op";
 
       # Create windows
       "${shiftModifier}+n" = "launch --location=hsplit --cwd=current";
