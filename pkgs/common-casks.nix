@@ -11,6 +11,7 @@ _:
     "spotify"
     "zen"
     "discord"
+    "claude-code"
     "whatsapp"
     "keyboardcleantool"
     "chatgpt"

@@ -1,5 +1,48 @@
 _: {
   xdg.configFile."zed/settings.json".text = builtins.toJSON {
+    auto_install_extensions = {
+      biome = true;
+    };
+
+    format_on_save = "on";
+
+    languages = {
+      JavaScript = {
+        formatter = { language_server = { name = "biome"; }; };
+        code_actions_on_format = {
+          "source.fixAll.biome" = true;
+          "source.organizeImports.biome" = true;
+        };
+      };
+      TypeScript = {
+        formatter = { language_server = { name = "biome"; }; };
+        code_actions_on_format = {
+          "source.fixAll.biome" = true;
+          "source.organizeImports.biome" = true;
+        };
+      };
+      JSX = {
+        formatter = { language_server = { name = "biome"; }; };
+        code_actions_on_format = {
+          "source.fixAll.biome" = true;
+          "source.organizeImports.biome" = true;
+        };
+      };
+      TSX = {
+        formatter = { language_server = { name = "biome"; }; };
+        code_actions_on_format = {
+          "source.fixAll.biome" = true;
+          "source.organizeImports.biome" = true;
+        };
+      };
+      JSON = {
+        formatter = { language_server = { name = "biome"; }; };
+      };
+      JSONC = {
+        formatter = { language_server = { name = "biome"; }; };
+      };
+    };
+
     # Cursor
     cursor_shape = "block";
 

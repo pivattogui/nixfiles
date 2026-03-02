@@ -11,9 +11,7 @@
     bat
     tig
     ntl
-    claude-code
     uv
-    opencode
     bun
     ncdu
     ripgrep

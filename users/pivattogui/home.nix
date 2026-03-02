@@ -42,6 +42,7 @@
     obs-studio
     heroic
     vlc
+    claude-code
     # Portal GTK for Flatpak URL opening (OpenURI)
     xdg-desktop-portal-gtk
     # Qt6 GNOME platform theme (for Caelestia Shell icons)
