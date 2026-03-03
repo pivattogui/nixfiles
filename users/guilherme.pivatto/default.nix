@@ -20,7 +20,6 @@
 
   homebrew.casks = [
     "dbgate"
-    "orbstack"
     "redis-insight"
     "hoppscotch"
     "notion"

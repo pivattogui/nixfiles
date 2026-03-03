@@ -7,15 +7,17 @@
 
   home-manager.users."${user.login}" = import ./home.nix { inherit config pkgs user; };
 
+  homebrew.brews = [
+    "asdf"
+  ];
+
   homebrew.casks = [
     "tableplus"
     "proton-mail"
     "protonvpn"
     "steam"
-    "stremio"
     "prismlauncher"
     "caffeine"
-    "docker-desktop"
     "bruno"
   ];
 }

@@ -40,6 +40,8 @@ in
     # asdf-vm 0.18+ binary works from PATH, but shims still need to be added
     initContent = ''
       export PATH="$HOME/.asdf/shims:$PATH"
+      export PATH=$HOME/.local/bin:$PATH
+
     '' + (if isDarwin then "" else ''
       export UV_PYTHON_PREFERENCE=only-system
       # Load wallust-generated shell colors (LS_COLORS, EZA_COLORS)

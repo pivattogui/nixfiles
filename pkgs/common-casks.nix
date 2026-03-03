@@ -16,6 +16,7 @@ _:
     "keyboardcleantool"
     "chatgpt"
     "github"
+    "orbstack"
     "alt-tab"
     "google-chrome"
   ];
