@@ -16,6 +16,8 @@
     "wxmac"
     "cmake"
     "cloudflared"
+    "kubernetes-cli"
+    "kubectx"
   ];
 
   homebrew.casks = [
@@ -26,5 +28,6 @@
     "notion-calendar"
     "slack"
     "linear-linear"
+    "gcloud-cli"
   ];
 }
