@@ -21,3 +21,5 @@ result-*
 # IDE
 .vscode/
 .idea/
+
+.omc
