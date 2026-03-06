@@ -9,9 +9,15 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Networking
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
+  # Networking https://wiki.nixos.org/wiki/Firewall
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 80 443 25565 ];
+    };
+  };
 
   # Timezone
   time.timeZone = "America/Sao_Paulo";

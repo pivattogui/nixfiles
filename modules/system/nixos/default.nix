@@ -2,53 +2,71 @@
   imports = [
     ./nvidia.nix
   ];
-
-  # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Bluetooth
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
-  };
-
-  # Services
-  services = {
-    # Bluetooth manager
-    blueman.enable = true;
-
-    # Flatpak (packages managed via Home Manager)
-    flatpak.enable = true;
-
-    # Greetd display manager
-    greetd = {
-      enable = true;
-      settings.default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-        user = "greeter";
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true;
+        ControllerMode = "dual";
+        FastConnectable = true;
+      };
+      Policy = {
+        AutoEnable = true;
       };
     };
+  };
 
-    # Audio with PipeWire
+  services = {
+    blueman.enable = true;
+    flatpak.enable = true;
+
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+      theme = "where-is-my-sddm-theme";
+    };
+
     pulseaudio.enable = false;
     pipewire = {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+      wireplumber = {
+        enable = true;
+        extraConfig = {
+          "10-bluez" = {
+            "monitor.bluez.properties" = {
+              "bluez5.enable-sbc-xq" = true;
+              "bluez5.enable-msbc" = true;
+              "bluez5.enable-hw-volume" = false;
+              "bluez5.headset-roles" = [ ];
+              "bluez5.hfphsp-backend" = "none";
+            };
+            "monitor.bluez.rules" = [
+              {
+                matches = [{ "device.name" = "~bluez_card.*"; }];
+                actions = {
+                  update-props = {
+                    "bluez5.auto-connect" = [ "a2dp_sink" "a2dp_source" ];
+                  };
+                };
+              }
+            ];
+          };
+        };
+      };
     };
 
-    # GNOME Keyring (standalone, without GNOME desktop)
     gnome.gnome-keyring.enable = true;
-
-    # Printing (disabled - not using printer)
     printing.enable = false;
-
-    # Tailscale VPN
     tailscale.enable = true;
   };
 
-  # Tailscale: don't start automatically
   systemd.services.tailscaled.wantedBy = lib.mkForce [];
 
   # Flatpak fonts: expose NixOS fonts at /usr/share/fonts (FHS path)
@@ -60,19 +78,15 @@
     options = [ "ro" "resolve-symlinks" "x-gvfs-hide" ];
   };
 
-  # Hyprland
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
 
-  # Environment
   environment = {
-    # Environment variables for Hyprland + NVIDIA
     sessionVariables = {
       WLR_NO_HARDWARE_CURSORS = "1";
       NIXOS_OZONE_WL = "1";
-      # Steam Big Picture - force Vulkan rendering
       STEAM_ENABLE_VULKAN_BIG_PICTURE = "1";
     };
 
@@ -80,10 +94,11 @@
     systemPackages = with pkgs; [
       git
       vim
-      # Hyprland utilities
       wl-clipboard
       grim
       slurp
+      libfreeaptx
+      where-is-my-sddm-theme
     ];
   };
 
@@ -112,7 +127,7 @@
   security = {
     # GNOME Keyring - auto-unlock on login (fixes Zed auth popup)
     pam.services = {
-      greetd.enableGnomeKeyring = true;
+      sddm.enableGnomeKeyring = true;
       login.enableGnomeKeyring = true;
     };
     rtkit.enable = true;

@@ -4,6 +4,7 @@
     ../../pkgs/xcompose.nix
     ../../pkgs/nixos/hyprland.nix
     ../../pkgs/nixos/caelestia.nix
+    ../../pkgs/nixos/spicetify.nix
   ];
 
   home.pointerCursor = {
@@ -22,13 +23,8 @@
     nodejs
     python3
     zed-editor
-    lazydocker
     nautilus
-    adwaita-icon-theme
-    adwaita-icon-theme-legacy  # Fullcolor icons (GNOME 46+ split)
     obsidian
-    spotify
-    discord
     _1password-gui
     docker
     pavucontrol
@@ -43,9 +39,7 @@
     heroic
     vlc
     claude-code
-    # Portal GTK for Flatpak URL opening (OpenURI)
     xdg-desktop-portal-gtk
-    # Qt6 GNOME platform theme (for Caelestia Shell icons)
     qgnomeplatform-qt6
   ];
 
@@ -64,6 +58,8 @@
     "app.zen_browser.zen"
     "com.stremio.Stremio"
     "io.github.flattool.Warehouse"
+    "io.podman_desktop.PodmanDesktop"
+    "com.discordapp.Discord"
   ];
 
   # Flatpak overrides: give access to /nix/store so apps can follow font symlinks

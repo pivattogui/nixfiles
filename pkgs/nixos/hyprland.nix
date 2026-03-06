@@ -1,4 +1,21 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  # Combined Adwaita icon theme: Legacy fullcolor + Modern symbolic
+  adwaita-combined = pkgs.symlinkJoin {
+    name = "adwaita-icon-theme-combined";
+    paths = [
+      pkgs.adwaita-icon-theme-legacy  # Fullcolor icons (base - lower priority)
+      pkgs.adwaita-icon-theme          # Symbolic icons (overlay - higher priority)
+    ];
+    # Rebuild icon cache after merging
+    nativeBuildInputs = [ pkgs.gtk3 ];
+    postBuild = ''
+      gtk-update-icon-cache -f $out/share/icons/Adwaita || true
+      gtk-update-icon-cache -f $out/share/icons/AdwaitaLegacy || true
+    '';
+  };
+in
+{
   gtk = {
     enable = true;
     theme = {
@@ -7,7 +24,7 @@
     };
     iconTheme = {
       name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
+      package = adwaita-combined;
     };
     gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
     gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
