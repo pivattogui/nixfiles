@@ -1,4 +1,17 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+let
+  sddm-theme = pkgs.where-is-my-sddm-theme.override {
+    themeConfig.General = {
+      showUsersByDefault = true;
+      showSessionsByDefault = true;
+      passwordFontSize = 48;
+      usersFontSize = 24;
+      sessionsFontSize = 16;
+      passwordCursorColor = "#ffffff";
+    };
+  };
+in
+{
   imports = [
     ./nvidia.nix
   ];
@@ -24,10 +37,18 @@
     blueman.enable = true;
     flatpak.enable = true;
 
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-      theme = "where-is-my-sddm-theme";
+    displayManager = {
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+        theme = "where_is_my_sddm_theme";
+        extraPackages = [
+          sddm-theme
+          pkgs.kdePackages.qt5compat
+        ];
+        settings.Wayland.EnableHiDPI = false;
+      };
+      defaultSession = "hyprland";
     };
 
     pulseaudio.enable = false;
@@ -91,15 +112,14 @@
     };
 
     # System packages
-    systemPackages = with pkgs; [
+    systemPackages = (with pkgs; [
       git
       vim
       wl-clipboard
       grim
       slurp
       libfreeaptx
-      where-is-my-sddm-theme
-    ];
+    ]) ++ [ sddm-theme ];
   };
 
   # XDG portal for Hyprland

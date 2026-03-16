@@ -38,6 +38,8 @@
     obs-studio
     heroic
     vlc
+    protonup-qt
+    gnome-logs
     claude-code
     xdg-desktop-portal-gtk
     qgnomeplatform-qt6
