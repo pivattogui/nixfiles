@@ -36,7 +36,6 @@
     cava
     fastfetch
     obs-studio
-    heroic
     vlc
     protonup-qt
     gnome-logs
@@ -58,6 +57,7 @@
 
   services.flatpak.packages = [
     "app.zen_browser.zen"
+    "com.heroicgameslauncher.hgl"
     "com.stremio.Stremio"
     "io.github.flattool.Warehouse"
     "io.podman_desktop.PodmanDesktop"

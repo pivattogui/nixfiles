@@ -23,26 +23,15 @@
     };
 
     # Caelestia Shell (Quickshell-based bar/widgets)
-    caelestia-shell = {
-      url = "github:caelestia-dots/shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Note: not following nixpkgs due to app2unit build failure in current nixpkgs
+    caelestia-shell.url = "github:caelestia-dots/shell";
 
     # Caelestia CLI (wallpaper, theming, scheme management)
-    caelestia-cli = {
-      url = "github:caelestia-dots/cli";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    caelestia-cli.url = "github:caelestia-dots/cli";
 
     # Spicetify (Spotify customization)
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # An Anime Game Launcher (Genshin Impact)
-    aagl = {
-      url = "github:ezKEa/aagl-gtk-on-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

@@ -84,7 +84,6 @@ in
     };
 
     gnome.gnome-keyring.enable = true;
-    printing.enable = false;
     tailscale.enable = true;
   };
 

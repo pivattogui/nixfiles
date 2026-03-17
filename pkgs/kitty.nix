@@ -130,10 +130,5 @@ in
       "${modifier}+w" = "close_window";
     } // superDiscardBindings;
 
-    # Environment variables for better Wayland compatibility
-    environment = if isDarwin then {} else {
-      # Disable experimental Wayland protocols that cause issues
-      "WAYLAND_DISPLAY" = "wayland-1";
-    };
   };
 }

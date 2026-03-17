@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-  # Common CLI packages shared across all users
   home.packages = with pkgs; [
     _1password-cli
     gh

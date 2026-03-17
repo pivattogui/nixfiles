@@ -32,7 +32,7 @@ in
 
   qt = {
     enable = true;
-    platformTheme.name = "gnome";
+    platformTheme.name = "adwaita";
     style.name = "adwaita-dark";
   };
 
@@ -116,12 +116,12 @@ in
         disable_splash_rendering = true;
       };
 
-      windowrulev2 = [
-        "float, class:^(pavucontrol)$"
-        "float, class:^(nm-connection-editor)$"
-        "float, class:^(1Password)$"
-        "float, class:^(.blueman-manager-wrapped)$"
-        "opacity 1.0 override 1.0 override, class:^(org.gnome.Nautilus)$"
+      windowrule = [
+        "float on, match:class ^(pavucontrol)$"
+        "float on, match:class ^(nm-connection-editor)$"
+        "float on, match:class ^(1Password)$"
+        "float on, match:class ^(.blueman-manager-wrapped)$"
+        "opacity 1.0 override 1.0 override, match:class ^(org\\.gnome\\.Nautilus)$"
       ];
 
       exec-once = [

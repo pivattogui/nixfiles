@@ -8,6 +8,7 @@
         else nixpkgs.lib.nixosSystem;
       hostConfig = ../hosts/${name};
       userConfig = ../users/${(user.login)};
+
     in systemFn rec {
       inherit system;
 

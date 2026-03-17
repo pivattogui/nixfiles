@@ -116,11 +116,10 @@ let
       enableHypr = true;      # Hyprland colors
       enableGtk = true;       # GTK theming
       enableQt = true;        # Qt theming
-      enableBtop = true;      # btop system monitor
-      enableCava = true;      # cava audio visualizer
-      enableDiscord = false;  # Disable Discord (not using Vencord/etc)
-      enableSpicetify = false; # Disable Spicetify (not using Spotify theming)
-      enableFuzzel = false;   # Using Caelestia launcher instead
+      enableBtop = true;
+      enableCava = true;
+      enableDiscord = false;
+      enableFuzzel = false;
     };
     wallpaper = {
       postHook = "${genKittyColors} && ${genHyprlockColors}";
