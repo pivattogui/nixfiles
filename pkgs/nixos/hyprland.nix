@@ -62,7 +62,7 @@ in
         "GTK_IM_MODULE,cedilla"
         "QT_IM_MODULE,cedilla"
         # Force icon theme for Qt apps (Caelestia Shell)
-        "QT_QPA_PLATFORMTHEME,gnome"
+        "QT_QPA_PLATFORMTHEME,adwaita"
       ];
 
       input = {

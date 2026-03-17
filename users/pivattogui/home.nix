@@ -23,6 +23,7 @@
     nodejs
     python3
     zed-editor
+    lutris
     nautilus
     obsidian
     _1password-gui
@@ -37,7 +38,6 @@
     fastfetch
     obs-studio
     vlc
-    protonup-qt
     gnome-logs
     claude-code
     xdg-desktop-portal-gtk

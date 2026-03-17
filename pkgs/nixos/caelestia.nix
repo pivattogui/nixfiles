@@ -3,6 +3,32 @@ let
   shellPackage = caelestia-shell.packages.${pkgs.system}.default;
   cliPackage = caelestia-cli.packages.${pkgs.system}.with-shell;
 
+  # Hides Steam game .desktop entries from app launchers by setting NoDisplay=true
+  hideSteamGames = pkgs.writeShellScript "hide-steam-games" ''
+    APPS_DIR="$HOME/.local/share/applications"
+    [ -d "$APPS_DIR" ] || exit 0
+
+    for f in "$APPS_DIR"/*.desktop; do
+      [ -f "$f" ] || continue
+      # Match Steam game launchers (Exec=steam steam://rungameid/...)
+      if grep -q '^Exec=steam steam://rungameid/' "$f" && ! grep -q '^NoDisplay=true' "$f"; then
+        echo "NoDisplay=true" >> "$f"
+      fi
+    done
+  '';
+
+  # Syncs system icon theme to user dir and rebuilds cache for proper icon resolution
+  syncIconCache = pkgs.writeShellScript "sync-icon-cache" ''
+    SYS_ICONS="/run/current-system/sw/share/icons/hicolor"
+    USER_ICONS="$HOME/.local/share/icons/hicolor"
+
+    [ -d "$SYS_ICONS" ] || exit 0
+
+    mkdir -p "$USER_ICONS"
+    ${pkgs.rsync}/bin/rsync -a "$SYS_ICONS/" "$USER_ICONS/"
+    ${pkgs.gtk3}/bin/gtk-update-icon-cache -f "$USER_ICONS" 2>/dev/null || true
+  '';
+
   wallpaperPicker = pkgs.writeShellScriptBin "wallpaper-picker" ''
     WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
 
@@ -251,6 +277,48 @@ in
       '';
       Restart = "always";
       RestartSec = 5;
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
+
+  systemd.user.services.hide-steam-games = {
+    Unit = {
+      Description = "Hide Steam game entries from app launchers";
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = hideSteamGames;
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
+
+  systemd.user.paths.hide-steam-games = {
+    Unit = {
+      Description = "Watch for new Steam game .desktop files";
+      After = [ "graphical-session.target" ];
+    };
+    Path = {
+      PathChanged = "%h/.local/share/applications";
+      Unit = "hide-steam-games.service";
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
+
+  systemd.user.services.sync-icon-cache = {
+    Unit = {
+      Description = "Sync system icon theme and rebuild cache";
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = syncIconCache;
     };
     Install = {
       WantedBy = [ "graphical-session.target" ];
