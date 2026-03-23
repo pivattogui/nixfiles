@@ -9,8 +9,6 @@
     eza
     bat
     tig
-    ntl
-    uv
     bun
     ncdu
     ripgrep

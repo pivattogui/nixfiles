@@ -1,11 +1,15 @@
 _:
 {
-  # Common Homebrew casks shared across all users
+  homebrew.brews = [
+    "asdf"
+  ];
+
   homebrew.casks = [
     "1password"
     "kitty"
     "obsidian"
     "zed"
+    "caffeine"
     "logi-options+"
     "rectangle"
     "spotify"
@@ -14,7 +18,6 @@ _:
     "claude-code"
     "whatsapp"
     "keyboardcleantool"
-    "chatgpt"
     "github"
     "orbstack"
     "alt-tab"

@@ -2,14 +2,10 @@
 {
   imports = [
     ../../modules/system/darwin/user.nix
-    ../../pkgs/common-casks.nix
+    ../../pkgs/common-homebrew.nix
   ];
 
   home-manager.users."${user.login}" = import ./home.nix { inherit config pkgs user; };
-
-  homebrew.brews = [
-    "asdf"
-  ];
 
   homebrew.casks = [
     "tableplus"
@@ -17,7 +13,7 @@
     "protonvpn"
     "steam"
     "prismlauncher"
-    "caffeine"
     "bruno"
+    "chatgpt"
   ];
 }

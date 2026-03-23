@@ -6,6 +6,10 @@
     ../../modules/system/darwin
   ];
 
+  services.tailscale = {
+      enable = true;
+  };
+
   system = {
     defaults.dock = {
       persistent-apps = [

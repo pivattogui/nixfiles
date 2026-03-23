@@ -10,28 +10,32 @@ let
   claudeConfig = builtins.toJSON {
     mcpServers = {
       filesystem = {
-        command = "npx";
+        command = "shell nixpkgs#nodejs --command npx";
         args = [ "-y" "@modelcontextprotocol/server-filesystem" config.home.homeDirectory ];
       };
       fetch = {
-        command = "uvx";
+        command = "shell nixpkgs#python3 --command uvx";
         args = [ "mcp-server-fetch" ];
       };
       memory = {
-        command = "npx";
+        command = "shell nixpkgs#nodejs --command npx";
         args = [ "-y" "@modelcontextprotocol/server-memory" ];
       };
       serena = {
-        command = "uvx";
+        command = "shell nixpkgs#python3 --command uvx";
         args = [ "--from" "git+https://github.com/oraios/serena" "serena-mcp-server" "--enable-web-dashboard" "false" ];
       };
       chrome-devtools = {
-        command = "npx";
+        command = "shell nixpkgs#nodejs --command npx";
         args = [ "-y" "chrome-devtools-mcp@latest" ];
       };
       sequential-thinking = {
-        command = "npx";
+        command = "shell nixpkgs#nodejs --command npx";
         args = [ "-y" "@modelcontextprotocol/server-sequential-thinking" ];
+      };
+      linear = {
+        command = "shell nixpkgs#nodejs --command npx";
+        args = [ "-y" "mcp-remote" "https://mcp.linear.app/mcp" ];
       };
     };
   };
