@@ -14,7 +14,6 @@
     "steam"
     "prismlauncher"
     "bruno"
-    "logi-options+"
     "obs"
   ];
 }
