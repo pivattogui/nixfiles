@@ -14,6 +14,7 @@
     "steam"
     "prismlauncher"
     "bruno"
-    "chatgpt"
+    "logi-options+"
+    "obs"
   ];
 }
