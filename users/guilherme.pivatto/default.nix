@@ -17,6 +17,8 @@
     "cloudflared"
     "kubernetes-cli"
     "kubectx"
+    "kubetui"
+    "derailed/k9s/k9s"
   ];
 
   homebrew.casks = [
