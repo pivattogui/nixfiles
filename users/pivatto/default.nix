@@ -15,5 +15,6 @@
     "prismlauncher"
     "bruno"
     "obs"
+    "claude"
   ];
 }

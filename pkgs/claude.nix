@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   programs.claude-code = {
     enable = true;
@@ -30,11 +30,11 @@
 
     mcpServers = {
       serena = {
-        command = "${pkgs.lix}/bin/nix";
+        command = "nix";
         args = [ "shell" "nixpkgs#python3" "--command" "uvx" "--from" "git+https://github.com/oraios/serena" "serena-mcp-server" "--enable-web-dashboard" "false" ];
       };
       linear = {
-        command = "${pkgs.lix}/bin/nix";
+        command = "nix";
         args = [ "shell" "nixpkgs#nodejs" "--command" "npx" "-y" "mcp-remote" "https://mcp.linear.app/mcp" ];
       };
     };
