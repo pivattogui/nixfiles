@@ -70,7 +70,7 @@ in
 {
   programs.kitty = {
     enable = true;
-    themeFile = if isDarwin then "vague" else null;
+    themeFile =  "Min_Dark";
 
     # Font configuration
     font = {
