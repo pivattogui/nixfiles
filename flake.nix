@@ -1,5 +1,5 @@
 {
-  description = "Nix configuration for Darwin and NixOS";
+  description = "Nix configuration for Darwin";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -9,31 +9,6 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
-
-    astal = {
-      url = "github:aylur/astal";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    ags = {
-      url = "github:aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.astal.follows = "astal";
-    };
-
-    # Caelestia Shell (Quickshell-based bar/widgets)
-    # Note: not following nixpkgs due to app2unit build failure in current nixpkgs
-    caelestia-shell.url = "github:caelestia-dots/shell";
-
-    # Caelestia CLI (wallpaper, theming, scheme management)
-    caelestia-cli.url = "github:caelestia-dots/cli";
-
-    # Spicetify (Spotify customization)
-    spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs@{ nixpkgs, ... }:
@@ -56,15 +31,6 @@
       user = {
         login = "guilherme.pivatto";
         git-email = "guilherme.pivatto@clinia.io";
-      };
-    };
-
-    # NixOS configurations
-    nixosConfigurations."nixos" = mkSystem "nixos" {
-      system = "x86_64-linux";
-      user = {
-        login = "pivattogui";
-        git-email = "github@pivatto.dev";
       };
     };
   };

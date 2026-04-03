@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is a personal nix-darwin configuration repository managing macOS environments using Nix flakes, nix-darwin, and Home Manager. The configuration supports multiple hosts (`moka` for personal, `clinia` for work) with per-user settings and shared modules.
+This is a personal nix-darwin configuration repository managing macOS environments using Nix flakes, nix-darwin, and Home Manager. It supports two hosts (`moka` for personal, `clinia` for work) with per-user settings and shared modules.
 
 ## Common Commands
 
@@ -40,10 +40,10 @@ nix-config  # alias for: zed /etc/nix-darwin
 The `mkSystem` helper function is the core abstraction that instantiates nix-darwin systems. It accepts:
 - `name`: Host name (e.g., "moka", "clinia")
 - `system`: Architecture (e.g., "aarch64-darwin")
-- `user`: User configuration with `login`, `git-email`, and optional `profile`
+- `user`: User configuration with `login` and `git-email`
 
 Key behavior:
-- If `user.profile` is set, loads user config from `users/${profile}/`, otherwise uses `users/${login}/`
+- Loads user config from `users/${login}/`
 - Automatically imports host-specific config from `hosts/${name}/`
 - Passes user attributes to all modules via `specialArgs`
 - Enables unfree packages and flakes by default

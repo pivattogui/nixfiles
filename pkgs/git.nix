@@ -1,10 +1,4 @@
-{ pkgs, ... }:
-let
-  inherit (pkgs.stdenv) isDarwin;
-  opSshSignPath = if isDarwin
-    then "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-    else "${pkgs._1password-gui}/share/1password/op-ssh-sign";
-in
+{ ... }:
 {
   programs.git = {
     enable = true;
@@ -82,7 +76,7 @@ in
 
       gpg = {
         format = "ssh";
-        ssh.program = opSshSignPath;
+        ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
       };
     };
   };

@@ -2,21 +2,16 @@
   name:
     { system, user }:
     let
-      isDarwin = builtins.match ".*-darwin" system != null;
-      systemFn = if isDarwin
-        then inputs.nix-darwin.lib.darwinSystem
-        else nixpkgs.lib.nixosSystem;
       hostConfig = ../hosts/${name};
       userConfig = ../users/${(user.login)};
 
-    in systemFn rec {
+    in inputs.nix-darwin.lib.darwinSystem rec {
       inherit system;
 
       specialArgs = inputs // { inherit user; };
 
       modules = [
         { nixpkgs.config.allowUnfree = true; }
-      ] ++ (if isDarwin then [
         {
           nix = {
             enable = false;
@@ -25,10 +20,6 @@
             };
           };
         }
-      ] else [
-        inputs.nix-flatpak.nixosModules.nix-flatpak
-      ])
-      ++ [
         hostConfig
         userConfig
       ];
