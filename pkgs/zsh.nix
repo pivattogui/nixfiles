@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   flake = "~/Code/nixfiles";
   nhCmd = "nh darwin";
@@ -6,6 +6,15 @@ in
 {
   programs.zsh = {
     enable = true;
+    history = {
+      path = "${config.home.homeDirectory}/.zsh_history";
+      size = 50000;
+      save = 50000;
+      share = true;
+      extended = true;
+      ignoreDups = true;
+      ignoreSpace = true;
+    };
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "fzf" ];

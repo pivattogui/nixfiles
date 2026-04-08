@@ -2,6 +2,15 @@
 let
   modifier = "cmd";
   shiftModifier = "cmd+shift";
+
+  zshHistorySearch = pkgs.writeShellScript "kitty-zsh-history-search" ''
+    cmd=$(LC_ALL=C ${pkgs.gawk}/bin/awk '
+      { sub(/^: [0-9]+:[0-9]+;/, ""); a[NR] = $0 }
+      END { for (i = NR; i >= 1; i--) if (!seen[a[i]]++) print a[i] }
+    ' "''${HISTFILE:-$HOME/.zsh_history}" | ${pkgs.fzf}/bin/fzf \
+      --no-sort --exact --tiebreak=index --height=100% --prompt='history> '
+    ) && [ -n "$cmd" ] && kitty @ send-text -- "$cmd"
+  '';
 in
 {
   programs.kitty = {
@@ -54,17 +63,16 @@ in
       background_blur = 40;
       term = "xterm-kitty";
       allow_remote_control = "yes";
+
+      scrollback_pager = "${pkgs.less}/bin/less --chop-long-lines --RAW-CONTROL-CHARS -i +G";
     };
 
     keybindings = {
       # New tab
       "${modifier}+t" = "new_tab_with_cwd";
 
-      # Search in zsh history
-      "${modifier}+r" = "launch --type=overlay --allow-remote-control sh -c 'cmd=$(cat ~/.zsh_history | ${pkgs.fzf}/bin/fzf --tac --no-sort --no-mouse --exact -i) && [ -n \"$cmd\" ] && kitty @ send-text \"$cmd\"'";
-
-      # Search in terminal scrollback
-      "${modifier}+f" = "launch --type=overlay --stdin-source=@screen_scrollback ${pkgs.fzf}/bin/fzf --no-sort --no-mouse --exact -i";
+      "${modifier}+r" = "launch --type=overlay --allow-remote-control ${zshHistorySearch}";
+      "${modifier}+f" = "show_scrollback";
 
       # Disable resize mode
       "ctrl+shift+r" = "no_op";
