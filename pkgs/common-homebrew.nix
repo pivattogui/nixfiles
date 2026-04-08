@@ -21,6 +21,6 @@ _:
     "orbstack"
     "alt-tab"
     "google-chrome"
-    "tailscale"
+    "tailscale-app"
   ];
 }
