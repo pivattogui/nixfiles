@@ -15,7 +15,7 @@
     mcpServers = {
       serena = {
         command = "nix";
-        args = [ "shell" "nixpkgs#python3" "--command" "uvx" "--from" "git+https://github.com/oraios/serena" "serena-mcp-server" "--enable-web-dashboard" "false" ];
+        args = [ "shell" "nixpkgs#python3" "--command" "uvx" "--from" "git+https://github.com/oraios/serena" "serena" "start-mcp-server" "--enable-web-dashboard" "false" ];
       };
       linear = {
         command = "nix";
