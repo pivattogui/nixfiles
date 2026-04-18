@@ -4,7 +4,7 @@
     enable = true;
 
     # Conteúdo em ./claude-memory.md — diff legível, highlight, edição sem rebuild
-    memory.text = builtins.readFile ./claude-memory.md;
+    context = builtins.readFile ./claude-memory.md;
 
     settings = {
       enabledPlugins = {

@@ -7,5 +7,6 @@
     lazydocker
     yazi
     elixir
+    unrar
   ];
 }
