@@ -1,97 +1,94 @@
 # nixfiles
 
-Cross-platform Nix configuration for macOS and NixOS, managed with [Nix flakes](https://nixos.wiki/wiki/Flakes), [nix-darwin](https://github.com/LnL7/nix-darwin), and [Home Manager](https://github.com/nix-community/home-manager).
+macOS configuration managed with [Nix flakes](https://nixos.wiki/wiki/Flakes), [nix-darwin](https://github.com/nix-darwin/nix-darwin), and [Home Manager](https://github.com/nix-community/home-manager).
 
 ## Hosts
 
-| Host | Platform | Description |
-|------|----------|-------------|
-| `moka` | macOS (Apple Silicon) | Personal MacBook |
-| `clinia` | macOS (Apple Silicon) | Work MacBook |
-| `nixos` | NixOS | Desktop with Hyprland + Caelestia |
+| Host | Architecture | User | Purpose |
+|------|--------------|------|---------|
+| `moka` | aarch64-darwin | `pivatto` | Personal MacBook |
+| `clinia` | aarch64-darwin | `guilherme.pivatto` | Work MacBook |
 
 ## Layout
 
 ```text
 .
-├── flake.nix           # Entry point with all hosts
-├── lib/mksystem.nix    # Builder: routes to darwinSystem or nixosSystem
-├── hosts/<name>/       # Host-specific settings (hardware, Dock, modules)
-├── users/<profile>/    # Per-user Home Manager configuration
+├── flake.nix              # Entry point, declares hosts
+├── lib/mksystem.nix       # darwinSystem builder
+├── hosts/<name>/          # Host-specific settings (Dock, hostname)
+├── users/<login>/         # Per-user Home Manager + Homebrew
 ├── modules/
-│   ├── home-common.nix # Cross-platform HM imports
-│   ├── system/darwin/  # macOS defaults (Dock, Finder, Touch ID)
-│   ├── system/nixos/   # NixOS config (Hyprland, PipeWire, NVIDIA)
-│   └── system/fonts/   # Shared font configuration
-└── pkgs/
-    ├── *.nix           # Cross-platform modules (zsh, git, kitty, ...)
-    └── nixos/          # NixOS-only modules (hyprland, caelestia)
+│   ├── home-common.nix    # Shared Home Manager imports
+│   └── system/
+│       ├── darwin/        # macOS defaults (Finder, Touch ID, user)
+│       └── fonts/         # Font packages
+└── pkgs/                  # Reusable program modules
+    ├── common-cli.nix     # CLI tools shared across users
+    ├── common-homebrew.nix # Homebrew apps shared across users
+    ├── zsh.nix · git.nix · kitty.nix · vim.nix · zed.nix
+    ├── 1password.nix · bat.nix · claude.nix
 ```
-
-## NixOS Desktop
-
-The NixOS host runs Hyprland with the [Caelestia](https://github.com/caelestia-shell/shell) ecosystem:
-
-- **Shell**: Bar, launcher, notifications, sidebar, control center
-- **Theming**: Dynamic colorschemes from wallpapers
-- **Lock screen**: Integrated via `caelestia-shell ipc call lock lock`
-- **Session**: Power menu, logout, etc.
-
-GUI apps are managed via Flatpak (configured in Home Manager with [nix-flatpak](https://github.com/gmodena/nix-flatpak)).
 
 ## Commands
 
-Platform-aware aliases (auto-detect Darwin vs NixOS):
+Aliases defined in `pkgs/zsh.nix`, all targeting `~/Code/nixfiles` via [`nh`](https://github.com/nix-community/nh):
 
 | Command | Description |
 |---------|-------------|
-| `rb-lint` | Static analysis (statix + deadnix) |
-| `rb-fmt` | Format code (alejandra) |
-| `rb-check` | Validate flake syntax |
+| `rb-lint` | Static analysis (`statix` + `deadnix`) |
+| `rb-fmt` | Format Nix code (`alejandra`) |
+| `rb-check` | Validate flake (`nix flake check`) |
 | `rb-build` | Dry-run build with package diff |
-| `rb` | Build + diff + confirm + switch |
-| `rb-rollback` | Rollback to previous generation (NixOS) |
-| `nix-clear` | Clean old generations (keeps 5, last 7 days) |
+| `rb` | Build, diff, confirm, and switch generation |
+| `nix-clear` | Remove old generations (keeps last 5, 7 days) |
+| `nix-config` | Open this repo in Zed |
 
 ### Manual rebuild
 
 ```bash
-# macOS
-sudo darwin-rebuild switch --flake /private/etc/nix-darwin#moka
+sudo darwin-rebuild switch --flake .#moka
+sudo darwin-rebuild switch --flake .#clinia
+```
 
-# NixOS
-sudo nixos-rebuild switch --flake ~/code/nixfiles#nixos
+### Maintenance
+
+```bash
+nix flake update         # Update nixpkgs, nix-darwin, home-manager
+nix-clear                # Garbage collect old generations
 ```
 
 ## Bootstrapping
 
-### macOS
-
 ```bash
 # Install Nix with flakes
-curl -L https://nixos.org/nix/install | sh
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
-# Clone and rebuild
-sudo git clone git@github.com:pivattogui/nixfiles.git /private/etc/nix-darwin
-cd /private/etc/nix-darwin
-sudo darwin-rebuild switch --flake .#moka
+# Clone the repo
+git clone git@github.com:pivattogui/nixfiles.git ~/Code/nixfiles
+cd ~/Code/nixfiles
+
+# First-time switch (pick the matching host)
+nix run nix-darwin -- switch --flake .#moka
 ```
 
-### NixOS
-
-```bash
-git clone git@github.com:pivattogui/nixfiles.git ~/code/nixfiles
-cd ~/code/nixfiles
-sudo nixos-rebuild switch --flake .#nixos
-```
+After the first switch, use `rb` for subsequent rebuilds.
 
 ## Adding software
 
-| Type | macOS | NixOS |
-|------|-------|-------|
-| CLI tools | `home.packages` or `pkgs/*.nix` | Same |
-| GUI apps | `homebrew.casks` | Flatpak in `home.nix` or nixpkgs |
-| System packages | Host module or `modules/` | Same |
+| Type | Where |
+|------|-------|
+| Nix CLI tools (shared) | `pkgs/common-cli.nix` |
+| Nix CLI tools (per user) | `users/<login>/home.nix` → `home.packages` |
+| Homebrew casks/brews (shared) | `pkgs/common-homebrew.nix` |
+| Homebrew casks/brews (per user) | `users/<login>/default.nix` |
+| New program module | New file under `pkgs/`, imported in `modules/home-common.nix` |
+| System packages | `hosts/<name>/default.nix` → `environment.systemPackages` |
+
+## Notes
+
+- Git commits are SSH-signed via 1Password (`op-ssh-sign` configured in `pkgs/git.nix`).
+- Homebrew auto-updates and cleans up on activation.
+- Home Manager backs up conflicting files with the `.hm-bak` suffix.
 
 ## License
 
