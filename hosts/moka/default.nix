@@ -7,6 +7,10 @@
     ../../modules/system/fonts
   ];
 
+  networking = {
+    hostName = "moka";
+    localHostName = "moka";
+  };
 
   system = {
     defaults.dock = {

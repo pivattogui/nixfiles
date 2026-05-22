@@ -6,6 +6,11 @@
     ../../modules/system/darwin
   ];
 
+  networking = {
+    hostName = "clinia";
+    computerName = "[CLINIA] Pivatto's MacBook Air";
+  };
+
   system = {
     defaults.dock = {
       persistent-apps = [
