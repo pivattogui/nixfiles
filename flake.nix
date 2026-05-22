@@ -12,26 +12,29 @@
   };
 
   outputs = inputs@{ nixpkgs, ... }:
-  let mkSystem = import ./lib/mksystem.nix {
+  let
+    mkSystem = import ./lib/mksystem.nix {
       inherit nixpkgs inputs;
+    };
+
+    hosts = {
+      moka = {
+        system = "aarch64-darwin";
+        user = {
+          login = "pivatto";
+          git-email = "github@pivatto.dev";
+        };
+      };
+      clinia = {
+        system = "aarch64-darwin";
+        user = {
+          login = "guilherme.pivatto";
+          git-email = "guilherme.pivatto@clinia.io";
+        };
+      };
     };
   in
   {
-    # Darwin configurations
-    darwinConfigurations."moka" = mkSystem "moka" {
-      system = "aarch64-darwin";
-      user = {
-        login = "pivatto";
-        git-email = "github@pivatto.dev";
-      };
-    };
-
-    darwinConfigurations."clinia" = mkSystem "clinia" {
-      system = "aarch64-darwin";
-      user = {
-        login = "guilherme.pivatto";
-        git-email = "guilherme.pivatto@clinia.io";
-      };
-    };
+    darwinConfigurations = nixpkgs.lib.mapAttrs mkSystem hosts;
   };
 }
