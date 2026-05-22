@@ -15,5 +15,7 @@
     fd
     tldr
     jq
+    ffmpeg
+    gh-dash
   ];
 }

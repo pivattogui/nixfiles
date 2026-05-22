@@ -2,6 +2,8 @@ _:
 {
   homebrew.brews = [
     "asdf"
+    "rtk"
+    "worktrunk"
   ];
 
   homebrew.casks = [
