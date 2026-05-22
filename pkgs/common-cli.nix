@@ -7,7 +7,6 @@
     fzf
     btop
     eza
-    bat
     tig
     bun
     ncdu

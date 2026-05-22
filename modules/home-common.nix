@@ -7,6 +7,7 @@
     ../pkgs/kitty.nix
     ../pkgs/vim.nix
     ../pkgs/zed.nix
+    ../pkgs/bat.nix
     ../pkgs/claude.nix
   ];
 
