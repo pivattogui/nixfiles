@@ -16,5 +16,6 @@
     jq
     ffmpeg
     gh-dash
+    watch
   ];
 }
