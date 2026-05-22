@@ -1,5 +1,18 @@
-{ ... }:
+{ pkgs, ... }:
 {
+  home.packages = [ pkgs.diffnav ];
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = false;
+    options = {
+      navigate = true;
+      dark = true;
+      line-numbers = true;
+      hyperlinks = true;
+    };
+  };
+
   programs.git = {
     enable = true;
 
@@ -10,16 +23,23 @@
 
     settings = {
       user.name = "Pivatto";
+
+      rerere = {
+        enabled = true;
+        autoUpdate = true;
+      };
       branch.sort = "-committerdate";
       column.ui = "auto";
       commit.verbose = true;
       core.editor = "vim";
+      core.pager = "delta";
+      interactive.diffFilter = "delta --color-only";
+      pager.diff = "diffnav --unified";
 
       diff = {
         algorithm = "histogram";
         colorMoved = "plain";
         mnemonicPrefix = true;
-        renames = true;
       };
 
       fetch = {
@@ -46,43 +66,10 @@
 
       tag.sort = "version:refname";
 
-      color = {
-        status = {
-          added = "green";
-          branch = "brightwhite bold";
-          changed = "yellow";
-          header = "white";
-          untracked = "brightblack";
-          unmerged = "red";
-        };
-
-        diff = {
-          commit = "yellow bold";
-          frag = "magenta bold";
-          func = "146 bold";
-          meta = "11";
-          new = "green bold";
-          old = "red bold";
-          whitespace = "red reverse";
-        };
-
-        diff-highlight = {
-          newHighlight = "green bold 22";
-          newNormal = "green bold";
-          oldHighlight = "red bold 52";
-          oldNormal = "red bold";
-        };
-      };
-
       gpg = {
         format = "ssh";
         ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
       };
     };
-  };
-
-  programs.diff-so-fancy = {
-    enable = true;
-    enableGitIntegration = true;
   };
 }
