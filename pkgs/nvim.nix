@@ -47,6 +47,7 @@ in
         vimdoc
         yaml
       ]))
+      nvim-tree-lua
       nvim-web-devicons
       plenary-nvim
       telescope-nvim
@@ -102,20 +103,6 @@ in
       vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
       vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
-      -- Oscura: re-set the 6 background highlights that the colorscheme paints
-      -- so the terminal background shows through. Mirrors OscuraTransparent in
-      -- the legacy pkgs/vim.nix.
-      vim.api.nvim_create_autocmd("ColorScheme", {
-        pattern = "oscura",
-        callback = function()
-          for _, group in ipairs({
-            "Normal", "NormalNC", "NormalFloat", "FloatBorder",
-            "SignColumn", "EndOfBuffer",
-          }) do
-            vim.api.nvim_set_hl(0, group, { bg = "none" })
-          end
-        end,
-      })
       vim.cmd.colorscheme("oscura")
 
       -- Treesitter
@@ -165,6 +152,20 @@ in
 
       -- LSP server setup (nvim-lspconfig v3 style: vim.lsp.config + vim.lsp.enable)
       vim.lsp.config("elixirls", { cmd = { "elixir-ls" } })
+      vim.lsp.config("nil_ls", {
+        -- Don't prompt to fetch missing flake inputs. The repo build
+        -- (nh darwin switch) already fetches what's needed; nil_ls fetching
+        -- on its own is redundant and interactive.
+        settings = {
+          ["nil"] = {
+            nix = {
+              flake = {
+                autoArchive = false;
+              };
+            };
+          };
+        };
+      })
       vim.lsp.enable({ "nil_ls", "ts_ls", "elixirls", "pyright", "gopls" })
 
       -- Format on save (conform.nvim)
@@ -278,6 +279,29 @@ in
 
       -- mini.surround only (rest of mini.nvim is unused)
       require("mini.surround").setup({})
+
+      -- File tree (nvim-tree). Sidebar on the left, mirrors the Zed/VS Code
+      -- mental model. Disable netrw so it doesn't fight us for directory buffers.
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+      require("nvim-tree").setup({
+        view = { width = 32 },
+        renderer = {
+          group_empty = true,
+          icons = {
+            git_placement = "after",
+          },
+        },
+        diagnostics = { enable = true },
+        git = { enable = true },
+        update_focused_file = { enable = true },
+        actions = {
+          open_file = { quit_on_open = false },
+        },
+      })
+
+      vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle file tree" })
+      vim.keymap.set("n", "<leader>E", "<cmd>NvimTreeFindFile<cr>", { desc = "Reveal current file in tree" })
     '';
   };
 }
