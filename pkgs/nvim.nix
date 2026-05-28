@@ -15,11 +15,9 @@ in
   programs.neovim = {
     enable = true;
 
-    # Inactive default during commit 1 — vim is still the editor.
-    # Commit 2 flips these to true.
-    defaultEditor = false;
-    viAlias = false;
-    vimAlias = false;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
 
     plugins = (with pkgs.vimPlugins; [
       bufferline-nvim

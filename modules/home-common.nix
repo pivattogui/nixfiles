@@ -5,7 +5,6 @@
     ../pkgs/1password.nix
     ../pkgs/git.nix
     ../pkgs/kitty.nix
-    ../pkgs/vim.nix
     ../pkgs/nvim.nix
     ../pkgs/zed.nix
     ../pkgs/bat.nix
