@@ -31,7 +31,7 @@
       branch.sort = "-committerdate";
       column.ui = "auto";
       commit.verbose = true;
-      core.editor = "vim";
+      core.editor = "nvim";
       core.pager = "delta";
       interactive.diffFilter = "delta --color-only";
       pager.diff = "diffnav --unified";

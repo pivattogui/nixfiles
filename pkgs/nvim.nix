@@ -196,7 +196,7 @@ in
       vim.keymap.set("n", "<leader>f", telescope.find_files, { desc = "Find files" })
       vim.keymap.set("n", "<leader>g", telescope.live_grep, { desc = "Project grep" })
       vim.keymap.set("n", "<leader>b", telescope.buffers, { desc = "Buffers" })
-      vim.keymap.set("n", "<leader>c", telescope.commands, { desc = "Commands" })
+      vim.keymap.set("n", "<leader>cc", telescope.commands, { desc = "Commands" })
       vim.keymap.set("n", "<leader>/", telescope.current_buffer_fuzzy_find, { desc = "Search in buffer" })
       vim.keymap.set("n", "<leader>?", telescope.help_tags, { desc = "Help tags" })
 
@@ -207,7 +207,6 @@ in
       })
       require("which-key").add({
         { "<leader>r", group = "refactor" },
-        { "<leader>l", group = "LSP" },
         { "<leader>c", group = "code action / commands" },
         { "[",         group = "previous" },
         { "]",         group = "next" },

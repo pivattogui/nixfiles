@@ -45,9 +45,8 @@ Form: `i<thing>` (inner — content only) or `a<thing>` (around — content + de
 | `i<` / `a<` | inside / around angle brackets |
 | `ip` / `ap` | paragraph (blank-line delimited) |
 | `it` / `at` | inside / around HTML/XML tag |
-| `if` / `af` | inside / around function (treesitter) |
 
-Combine with operators: `ci"` change inside quotes, `da{` delete around braces, `vaf` visual select around function.
+Combine with operators: `ci"` change inside quotes, `da{` delete around braces, `vap` visual select around paragraph.
 
 ## 3. Fine movement (no count needed)
 
