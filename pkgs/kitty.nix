@@ -112,6 +112,32 @@ in
       # Close
       "${shiftModifier}+w" = "close_tab";
       "${modifier}+w" = "close_window";
+
+      # Clipboard at terminal level (macOS standard)
+      "${modifier}+c" = "copy_to_clipboard";
+      "${modifier}+v" = "paste_from_clipboard";
+
+      # Clear screen + scrollback (iTerm2/Terminal.app convention)
+      "${modifier}+k" = "clear_terminal to_cursor active";
+
+      # On macOS, Cmd+letter has no legacy terminal encoding, so kitty
+      # falls back to sending CSI u sequences (e.g. \e[122;9u for Cmd+z).
+      # zsh and nvim insert-mode render those as garbage text. Discard
+      # the unbound ones at the terminal layer.
+      "${modifier}+a" = "discard_event";
+      "${modifier}+b" = "discard_event";
+      "${modifier}+d" = "discard_event";
+      "${modifier}+e" = "discard_event";
+      "${modifier}+g" = "discard_event";
+      "${modifier}+i" = "discard_event";
+      "${modifier}+j" = "discard_event";
+      "${modifier}+o" = "discard_event";
+      "${modifier}+p" = "discard_event";
+      "${modifier}+s" = "discard_event";
+      "${modifier}+u" = "discard_event";
+      "${modifier}+x" = "discard_event";
+      "${modifier}+y" = "discard_event";
+      "${modifier}+z" = "discard_event";
     };
 
   };
