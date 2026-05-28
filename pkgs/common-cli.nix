@@ -17,5 +17,6 @@
     ffmpeg
     gh-dash
     watch
+    lazygit
   ];
 }
