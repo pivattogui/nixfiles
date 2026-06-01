@@ -103,6 +103,11 @@ in
       vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
       vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
+      -- Mouse wheel scrolls the viewport AND drags the cursor with it
+      -- (3 lines per notch matches the default `mousescroll=ver:3`).
+      vim.keymap.set({ "n", "v" }, "<ScrollWheelUp>",   "3<C-y>3k", { silent = true })
+      vim.keymap.set({ "n", "v" }, "<ScrollWheelDown>", "3<C-e>3j", { silent = true })
+
       vim.cmd.colorscheme("oscura")
 
       -- Treesitter
