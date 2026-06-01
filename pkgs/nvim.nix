@@ -294,6 +294,10 @@ in
         },
         diagnostics = { enable = true },
         git = { enable = true },
+        filters = {
+          dotfiles = false,
+          git_ignored = false,
+        },
         update_focused_file = { enable = true },
         actions = {
           open_file = { quit_on_open = false },
