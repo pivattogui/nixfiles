@@ -1,5 +1,4 @@
-{ self, ... }: {
-
+{self, ...}: {
   environment.systemPackages = [];
 
   imports = [
@@ -24,6 +23,7 @@
         "/Applications/Spotify.app"
         "/Applications/WhatsApp.app"
         "/Applications/Discord.app"
+        "/Applications/Codex.app"
       ];
     };
     configurationRevision = self.rev or self.dirtyRev or null;

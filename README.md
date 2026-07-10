@@ -7,7 +7,6 @@ macOS configuration managed with [Nix flakes](https://nixos.wiki/wiki/Flakes), [
 | Host | Architecture | User | Purpose |
 |------|--------------|------|---------|
 | `moka` | aarch64-darwin | `pivatto` | Personal MacBook |
-| `clinia` | aarch64-darwin | `guilherme.pivatto` | Work MacBook |
 
 ## Layout
 
@@ -18,13 +17,11 @@ macOS configuration managed with [Nix flakes](https://nixos.wiki/wiki/Flakes), [
 ├── hosts/<name>/          # Host-specific settings (Dock, hostname)
 ├── users/<login>/         # Per-user Home Manager + Homebrew
 ├── modules/
-│   ├── home-common.nix    # Shared Home Manager imports
+│   ├── home-common.nix    # Base Home Manager imports
 │   └── system/
 │       ├── darwin/        # macOS defaults (Finder, Touch ID, user)
 │       └── fonts/         # Font packages
 └── pkgs/                  # Reusable program modules
-    ├── common-cli.nix     # CLI tools shared across users
-    ├── common-homebrew.nix # Homebrew apps shared across users
     ├── zsh.nix · git.nix · kitty.nix · vim.nix · zed.nix
     ├── 1password.nix · bat.nix · claude.nix
 ```
@@ -47,7 +44,6 @@ Aliases defined in `pkgs/zsh.nix`, all targeting `~/Code/nixfiles` via [`nh`](ht
 
 ```bash
 sudo darwin-rebuild switch --flake .#moka
-sudo darwin-rebuild switch --flake .#clinia
 ```
 
 ### Maintenance
@@ -77,10 +73,8 @@ After the first switch, use `rb` for subsequent rebuilds.
 
 | Type | Where |
 |------|-------|
-| Nix CLI tools (shared) | `pkgs/common-cli.nix` |
-| Nix CLI tools (per user) | `users/<login>/home.nix` → `home.packages` |
-| Homebrew casks/brews (shared) | `pkgs/common-homebrew.nix` |
-| Homebrew casks/brews (per user) | `users/<login>/default.nix` |
+| Nix CLI tools | `users/<login>/home.nix` → `home.packages` |
+| Homebrew casks/brews | `users/<login>/default.nix` |
 | New program module | New file under `pkgs/`, imported in `modules/home-common.nix` |
 | System packages | `hosts/<name>/default.nix` → `environment.systemPackages` |
 

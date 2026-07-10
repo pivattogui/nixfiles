@@ -10,7 +10,7 @@ last-reviewed: 2026-04-07
 
 - Senior developer, pragmatic, skeptical. Prefers direct answers, no sugar-coating, with explicit reasoning.
 - Active stack: TypeScript/Node, Elixir, Python, Go. Don't assume one — check the repo first.
-- Hosts: `moka` = personal, `clinia` = work. On `clinia` assume strict confidentiality: don't mention client/project names outside the repo, don't suggest uploading content to external services without asking.
+- Hosts: `moka` = personal.
 
 ## Language
 

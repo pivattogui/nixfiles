@@ -11,8 +11,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ nixpkgs, ... }:
-  let
+  outputs = inputs @ {nixpkgs, ...}: let
     mkSystem = import ./lib/mksystem.nix {
       inherit nixpkgs inputs;
     };
@@ -25,16 +24,8 @@
           git-email = "github@pivatto.dev";
         };
       };
-      clinia = {
-        system = "aarch64-darwin";
-        user = {
-          login = "guilherme.pivatto";
-          git-email = "guilherme.pivatto@clinia.io";
-        };
-      };
     };
-  in
-  {
+  in {
     darwinConfigurations = nixpkgs.lib.mapAttrs mkSystem hosts;
   };
 }
