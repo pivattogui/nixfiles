@@ -18,7 +18,7 @@
 
   homebrew.casks = [
     "1password"
-    "kitty"
+    "ghostty"
     "obsidian"
     "zed"
     "caffeine"

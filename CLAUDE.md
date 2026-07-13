@@ -64,7 +64,7 @@ Key behavior:
    - `system/fonts`: Font packages managed by Nix
 
 4. **Reusable Profiles** (`pkgs/`)
-   - Self-contained program configurations (zsh, git, kitty, 1password, vim)
+   - Self-contained program configurations (zsh, git, ghostty, 1password, vim)
    - Imported by users as needed in their `home.nix`
 
 ### Adding New Software

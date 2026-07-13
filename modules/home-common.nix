@@ -7,7 +7,7 @@
     ../pkgs/zsh.nix
     ../pkgs/1password.nix
     ../pkgs/git.nix
-    ../pkgs/kitty.nix
+    ../pkgs/ghostty.nix
     ../pkgs/nvim.nix
     ../pkgs/zed.nix
     ../pkgs/bat.nix

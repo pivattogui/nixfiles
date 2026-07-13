@@ -22,7 +22,7 @@ macOS configuration managed with [Nix flakes](https://nixos.wiki/wiki/Flakes), [
 │       ├── darwin/        # macOS defaults (Finder, Touch ID, user)
 │       └── fonts/         # Font packages
 └── pkgs/                  # Reusable program modules
-    ├── zsh.nix · git.nix · kitty.nix · vim.nix · zed.nix
+    ├── zsh.nix · git.nix · ghostty.nix · vim.nix · zed.nix
     ├── 1password.nix · bat.nix · claude.nix
 ```
 

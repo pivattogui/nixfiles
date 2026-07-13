@@ -16,14 +16,14 @@
       persistent-apps = [
         "/Applications/1password.app"
         "/Applications/Proton Mail.app"
-        "/Applications/Kitty.app"
+        "/Applications/Ghostty.app"
         "/Applications/Zen.app"
         "/Applications/Zed.app"
         "/Applications/Obsidian.app"
         "/Applications/Spotify.app"
         "/Applications/WhatsApp.app"
         "/Applications/Discord.app"
-        "/Applications/Codex.app"
+        "/Applications/ChatGPT.app"
       ];
     };
     configurationRevision = self.rev or self.dirtyRev or null;
