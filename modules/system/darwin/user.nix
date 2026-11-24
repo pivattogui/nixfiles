@@ -30,11 +30,8 @@
     onActivation = {
       autoUpdate = true;
       cleanup = "zap";
-      upgrade = true;
-      # Homebrew >=5.1 requires an explicit flag for non-interactive `brew
-      # bundle --cleanup`; without it activation aborts. --force-cleanup runs
-      # cleanup without prompting (not --force, which means install overwrite).
-      extraFlags = [ "--force-cleanup" ];
+      # Keep an unavailable upstream cask update from blocking activation.
+      upgrade = false;
     };
   };
 }
