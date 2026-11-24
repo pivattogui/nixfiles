@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ config, ... }:
 let
   flake = "~/Code/nixfiles";
   nhCmd = "nh darwin";

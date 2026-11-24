@@ -1,6 +1,5 @@
 {
   user,
-  pkgs,
   ...
 }: {
   imports = [
