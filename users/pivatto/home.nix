@@ -5,6 +5,7 @@
 
   home.packages = with pkgs; [
     _1password-cli
+    codex
     gh
     unzip
     fzf
