@@ -12,8 +12,8 @@
 
   homebrew.brews = [
     "asdf"
-    "rtk"
     "worktrunk"
+    "opencode"
   ];
 
   homebrew.casks = [
@@ -22,8 +22,6 @@
     "obsidian"
     "zed"
     "caffeine"
-    "logi-options+"
-    "rectangle"
     "spotify"
     "zen"
     "discord"
@@ -31,8 +29,6 @@
     "keyboardcleantool"
     "github"
     "orbstack"
-    "alt-tab"
-    "google-chrome"
     "tailscale-app"
     "tableplus"
     "proton-mail"
@@ -42,7 +38,13 @@
     "bruno"
     "obs"
     "transmission"
-    "moonlight"
     "codex-app"
+    "helium-browser"
+    "superwhisper"
+    "drawio"
+    "photocraft"
+    "granola"
+    "dbeaver-community"
+    "pcsx2"
   ];
 }

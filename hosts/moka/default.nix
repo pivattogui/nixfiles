@@ -16,13 +16,13 @@
       persistent-apps = [
         "/Applications/1password.app"
         "/Applications/Proton Mail.app"
-        "/Applications/Ghostty.app"
-        "/Applications/Zen.app"
+        "/Applications/Helium.app"
         "/Applications/Zed.app"
         "/Applications/Obsidian.app"
         "/Applications/Spotify.app"
         "/Applications/WhatsApp.app"
         "/Applications/Discord.app"
+        "/Applications/Ghostty.app"
         "/Applications/ChatGPT.app"
       ];
     };
